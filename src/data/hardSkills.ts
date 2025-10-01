@@ -34,6 +34,11 @@ const hardSkills: HardSkill[] = [
     name: "Power BI",
     description: "Servicio de análisis empresarial para visualizaciones interactivas.",
     icon: "powerbi"
+  },
+  {
+    name: "Google Bigquery",
+    description: "Almacenamiento y análisis de grandes volúmenes de datos en la nube.",
+    icon: "bigquery"
   }
 ];
 
