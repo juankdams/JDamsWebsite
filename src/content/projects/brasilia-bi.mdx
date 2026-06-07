@@ -1,0 +1,121 @@
+---
+title: Implementación del modelo de Inteligencia de Negocios en Expreso Brasilia
+summary: Diseño e implementación de un modelo de inteligencia de negocios para centralizar datos, construir pipelines ETL y habilitar tableros gerenciales, comerciales y operativos en Power BI.
+tags:
+    - Business Intelligence
+    - ETL
+    - KNIME
+    - Oracle
+    - PostgreSQL
+    - Power BI
+startDate: 2023-11-01
+endDate: 2025-07-09
+author: Juan Camilo Dams
+url: "#"
+cover: './images/budget-wise/finance_app_concept.webp'
+ogImage: './images/budget-wise/og-finance_app.webp'
+---
+
+<section className="project-canvas not-prose">
+  <div className="project-canvas-panel">
+    <p className="font-label-sm text-label-sm font-bold uppercase tracking-[0.18em] text-primary">Contexto</p>
+    <h2 className="mt-2 text-2xl font-bold text-on-surface">Una capa BI para decisiones operativas</h2>
+    <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+      En Expreso Brasilia participé en la implementación de un modelo de Inteligencia de Negocios para centralizar datos críticos y convertirlos en tableros confiables para gerencia, ventas y operación.
+    </p>
+    <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+      El proyecto inició con la selección de tecnologías y el diseño de pipelines en <strong>KNIME</strong>. Desde allí extraíamos y preparábamos datos de <strong>Oracle</strong> alojado en <strong>Azure</strong>, para consolidarlos en un data warehouse en <strong>PostgreSQL</strong>.
+    </p>
+
+    <div className="mt-5 rounded-2xl bg-surface-container-high p-4">
+      <h3 className="text-sm font-bold text-on-surface">Modelo semántico</h3>
+      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+        Sobre PostgreSQL implementamos tablas de hechos, dimensiones y tablas agregadas para optimizar la carga, reducir lógica duplicada y hacer más confiables los indicadores en Power BI.
+      </p>
+    </div>
+  </div>
+
+  <figure className="project-canvas-flow">
+    <div role="img" aria-labelledby="brasilia-flow-title" aria-describedby="brasilia-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
+      <div>
+        <h3 id="brasilia-flow-title" className="text-xl font-bold text-on-surface">Arquitectura del flujo BI</h3>
+        <p id="brasilia-flow-desc" className="mt-1 text-sm text-on-surface-variant">
+          Extracción, preparación, almacenamiento analítico y consumo ejecutivo.
+        </p>
+      </div>
+
+      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.25fr] xl:items-center">
+        <div className="project-flow-card">
+          <span>1</span>
+          <strong>Oracle</strong>
+          <p>Base de datos<br />en Azure</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>2</span>
+          <strong>KNIME</strong>
+          <p>Pipelines ETL<br />low code</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>3</span>
+          <strong>PostgreSQL</strong>
+          <p>Data warehouse<br />analítico</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>4</span>
+          <strong>Modelo semántico</strong>
+          <p>Hechos y dimensiones<br />Tablas agregadas</p>
+          <em>Carga optimizada</em>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.75fr]">
+        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
+          <strong className="block text-base font-bold text-on-surface">Validación y limpieza</strong>
+          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">Transformación de datos</span>
+        </div>
+
+        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
+          <strong className="block text-base font-bold">Tableros Power BI</strong>
+          <span className="mt-1 block text-sm text-white/80">Consumo ejecutivo</span>
+        </div>
+      </div>
+    </div>
+    <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
+      Flujo general: origen transaccional, pipelines ETL, data warehouse, modelo semántico y consumo ejecutivo.
+    </figcaption>
+  </figure>
+
+  <div className="project-canvas-panel">
+    <p className="font-label-sm text-label-sm font-bold uppercase tracking-[0.18em] text-primary">Alcance</p>
+    <div className="project-canvas-kpis mt-4">
+      <div className="project-kpi">
+        <strong>5</strong>
+        <span>frentes de tableros: gerencia, ventas, operación, mensajería y carga.</span>
+      </div>
+      <div className="project-kpi">
+        <strong>4</strong>
+        <span>capas: origen, ETL, data warehouse y modelo semántico.</span>
+      </div>
+      <div className="project-kpi">
+        <strong>BI</strong>
+        <span>orientado a seguimiento ejecutivo y control operativo.</span>
+      </div>
+    </div>
+
+    <div className="mt-5">
+      <h3 className="text-sm font-bold text-on-surface">Aprendizajes</h3>
+      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+        El reto fortaleció mi manejo de SQL, metodología ETL, diseño de pipelines low code y modelado analítico. También me permitió conectar procesos reales del negocio con indicadores útiles para tomar decisiones.
+      </p>
+    </div>
+  </div>
+</section>

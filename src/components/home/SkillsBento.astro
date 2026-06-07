@@ -1,0 +1,80 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Skill {
+    name: string;
+    description: string;
+    icon: string;
+    tags: string[];
+    variant: 'featured' | 'wide' | 'compact';
+}
+
+interface Props {
+    skills: Skill[];
+}
+
+const { skills } = Astro.props;
+
+const getCardClass = (skill: Skill, index: number) => {
+    if (skill.variant === 'featured') {
+        return 'md:col-span-2 md:row-span-2 bg-gradient-to-br from-primary-container/30 to-surface-container-high p-8 md:p-10 justify-between';
+    }
+
+    if (skill.variant === 'wide') {
+        const columnSpan = index === skills.length - 1 ? 'md:col-span-4' : 'md:col-span-2';
+        return `${columnSpan} bg-gradient-to-r from-surface-container-low to-secondary-container/20 p-8 md:flex-row md:items-center`;
+    }
+
+    return 'md:col-span-1 bg-surface-container-low p-8';
+};
+---
+
+<section class="relative z-20 mx-auto max-w-container-max px-gutter py-section-gap" id="technical-stack">
+    <SectionHeading
+        eyebrow="Stack técnico"
+        title="Stack Técnico"
+        description="Capacidades organizadas como un sistema de datos: infraestructura, modelado, automatización y visualización."
+    />
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:gap-6">
+        {skills.map((skill, index) => (
+            <article class:list={[
+                'bento-card group relative flex min-h-56 flex-col overflow-hidden rounded-4xl border border-outline-variant/30 transition-colors hover:bg-surface-container-high',
+                getCardClass(skill, index),
+            ]}>
+                {skill.variant === 'featured' && (
+                    <div class="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-primary/10 blur-2xl transition-transform duration-700 group-hover:scale-150"></div>
+                )}
+
+                <div class:list={[
+                    'relative z-10',
+                    skill.variant === 'wide' ? 'flex flex-col gap-5 md:flex-row md:items-center' : '',
+                ]}>
+                    <span class:list={[
+                        'material-symbols-outlined mb-5 block text-4xl transition-transform group-hover:-translate-y-1',
+                        skill.variant === 'featured' ? 'w-fit rounded-2xl bg-surface p-4 text-5xl text-primary shadow-sm' : 'text-secondary',
+                        skill.variant === 'wide' ? 'mb-0 w-fit rounded-2xl bg-surface p-4 text-primary shadow-sm' : '',
+                    ]}>{skill.icon}</span>
+
+                    <div>
+                        <h3 class:list={[
+                            'mb-2 text-on-surface',
+                            skill.variant === 'featured' ? 'font-headline-lg text-headline-lg' : 'font-headline-md text-headline-md',
+                        ]}>
+                            {skill.name}
+                        </h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">{skill.description}</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 mt-8 flex flex-wrap gap-3">
+                    {skill.tags.map((tag) => (
+                        <span class="rounded-xl bg-surface/80 px-4 py-2 font-label-sm text-label-sm font-bold text-primary backdrop-blur">
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            </article>
+        ))}
+    </div>
+</section>

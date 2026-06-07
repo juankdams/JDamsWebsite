@@ -1,9 +1,32 @@
 ---
+import { ME, SOCIALS } from '@/config';
 
+const visibleSocials = SOCIALS.filter((social) => social.show);
 ---
-<footer class="container py-4 text-center">
-  <p>
-    Editado con ❤️ por <a href="https://github.com/juankdams" target="_blank" rel="noopener noreferrer">Juan Camilo Dams.</a>
-    Gracias a <a href="https://vicbox.dev" target="_blank" rel="noopener noreferrer">VicBox</a> por la plantilla.
-  </p>
+<footer class="relative mt-10 overflow-hidden rounded-t-[3rem] bg-inverse-surface py-16 text-inverse-on-surface">
+  <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-50"></div>
+  <div class="relative z-10 mx-auto flex max-w-container-max flex-col items-center justify-between gap-8 px-gutter md:flex-row">
+    <div class="flex flex-col items-center text-center md:items-start md:text-left">
+      <div class="mb-4 flex items-center gap-2 opacity-80">
+        <span class="material-symbols-outlined">terminal</span>
+        <span class="font-label-md text-label-md font-bold uppercase tracking-widest">ING_DATOS</span>
+      </div>
+      <p class="font-body-md text-body-md text-inverse-on-surface/70">
+        © 2026 {ME.name}. Construido para sistemas de datos confiables y disponibles.
+      </p>
+    </div>
+
+    <div class="flex gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+      {visibleSocials.map((social) => (
+        <a class="flex h-10 w-10 items-center justify-center rounded-full text-inverse-on-surface transition-colors hover:bg-white/10" href={social.url} target="_blank" rel="noopener noreferrer" title={social.name}>
+          <span class="material-symbols-outlined text-xl">
+            {social.name === 'GitHub' ? 'code' : social.name === 'Twitter' ? 'alternate_email' : social.name === 'Instagram' ? 'photo_camera' : 'link'}
+          </span>
+        </a>
+      ))}
+      <a class="flex h-10 w-10 items-center justify-center rounded-full text-inverse-on-surface transition-colors hover:bg-white/10" href={`mailto:${ME.contactInfo.email}`} title="Correo">
+        <span class="material-symbols-outlined text-xl">mail</span>
+      </a>
+    </div>
+  </div>
 </footer>

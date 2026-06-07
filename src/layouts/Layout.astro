@@ -3,7 +3,6 @@ import {ClientRouter} from 'astro:transitions';
 import {cn} from "../lib/utils";
 import '@/styles/globals.css'
 
-import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
 import {SITE} from '@/config';
@@ -16,6 +15,7 @@ interface Props {
     author?: string;
     imageOg?: string;
     canonicalURL?: string;
+    fullWidth?: boolean;
 }
 
 const {
@@ -26,6 +26,7 @@ const {
     scrollSmooth,
     canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
     imageOg = SITE.ogImage,
+    fullWidth = false,
 } = Astro.props;
 ---
 
@@ -44,6 +45,9 @@ const {
     <link rel="sitemap" href="/sitemap-index.xml"/>
     <link rel="icon" href={SITE.favicon}/>
     <link rel="canonical" href={canonicalURL}/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title}/>
@@ -60,9 +64,8 @@ const {
     <title>{title}</title>
     <ClientRouter/>
 </head>
-<body class="bg-light-theme dark:bg-dark-theme antialiased text-n700 dark:text-light-theme w-full h-screen flex flex-col">
-<Navbar/>
-<main class="container py-24 flex gap-8 flex-col" role="main"  id="top">
+<body class="mesh-bg antialiased text-on-surface w-full min-h-screen flex flex-col">
+<main class={cn("data-grid-overlay", fullWidth ? "w-full" : "container py-24 flex gap-8 flex-col")} role="main"  id="top">
     <slot/>
 </main>
 <Footer/>

@@ -1,0 +1,77 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Education {
+    title: string;
+    institution: string;
+    period: string;
+    location: string;
+}
+
+interface Props {
+    education: Education[];
+    certifications: string[];
+}
+
+const { education, certifications } = Astro.props;
+---
+
+<section class="relative mx-auto max-w-container-max px-gutter py-section-gap" id="educacion">
+    <SectionHeading
+        eyebrow="Formación"
+        title="Educación"
+        description="Base académica y certificaciones aplicadas al análisis, gestión y construcción de soluciones de datos."
+    />
+
+    <div class="relative overflow-hidden rounded-[3rem] border border-outline-variant/30 bg-surface-container-low/50 p-8 shadow-xl shadow-primary-container/5 backdrop-blur-md md:p-16">
+        <div class="absolute -right-40 -top-40 -z-10 h-96 w-96 rounded-full bg-secondary-fixed/20 blur-3xl"></div>
+
+        <div class="relative z-10 grid gap-16 md:grid-cols-2">
+            <div>
+                <h2 class="mb-10 flex items-center gap-4 font-headline-lg text-headline-lg text-on-surface">
+                    <span class="material-symbols-outlined rounded-2xl bg-surface p-3 text-primary shadow-sm">school</span>
+                    Académica
+                </h2>
+
+                <div class="relative space-y-8 before:absolute before:inset-y-0 before:left-[11px] before:w-[2px] before:bg-gradient-to-b before:from-primary/30 before:to-transparent">
+                    {education.map((item, index) => (
+                        <article class="relative pl-10">
+                            <div class:list={[
+                                'absolute left-0 top-1.5 h-6 w-6 rounded-full border-4 bg-surface shadow-sm',
+                                index === 0 ? 'border-primary' : 'border-primary/40',
+                            ]}></div>
+                            <span class="font-label-sm text-label-sm font-bold tracking-wider text-primary">
+                                {item.period}
+                            </span>
+                            <h3 class="mt-1 font-headline-md text-headline-md text-on-surface">{item.title}</h3>
+                            <p class="mt-2 font-body-md text-body-md text-on-surface-variant">
+                                {item.institution} · {item.location}
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+
+            <div>
+                <h2 class="mb-10 flex items-center gap-4 font-headline-lg text-headline-lg text-on-surface">
+                    <span class="material-symbols-outlined rounded-2xl bg-surface p-3 text-secondary shadow-sm">workspace_premium</span>
+                    Para el trabajo
+                </h2>
+
+                <div class="flex flex-wrap gap-4">
+                    {certifications.map((certification, index) => (
+                        <div class="group relative rounded-2xl border border-outline-variant/30 bg-surface px-6 py-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+                            <span class="relative z-10 font-label-md text-label-md text-on-surface">
+                                {certification}
+                            </span>
+                            <div class:list={[
+                                'absolute inset-0 rounded-2xl bg-gradient-to-r to-transparent opacity-0 transition-opacity group-hover:opacity-100',
+                                index % 2 === 0 ? 'from-primary/5' : 'from-secondary/5',
+                            ]}></div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -13,6 +13,11 @@ export const SITE = {
     profile: "https://www.linkedin.com/in/juancdams/",
 }
 
+type ProfileFact = {
+    value: number;
+    description: string;
+};
+
 export const ME = {
     name: "Juan Camilo Dams",
     profession: "Ingeniero Industrial | Inteligencia de Negocios",
@@ -22,7 +27,7 @@ export const ME = {
         //     value: 3,
         //     description: "Años de Experiencia"
         // },
-    ],
+    ] as ProfileFact[],
     contactInfo: {
         email: "juancadams1@gmail.com",
         linkedin: "https://www.linkedin.com/in/juancdams/",

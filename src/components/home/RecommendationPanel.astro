@@ -1,0 +1,136 @@
+---
+interface Recommendation {
+    name: string;
+    role: string;
+    quote: string;
+}
+
+interface Props {
+    recommendations: Recommendation[];
+}
+
+const { recommendations } = Astro.props;
+const getInitials = (name: string) => name
+        .split(' ')
+        .slice(0, 2)
+        .map((part) => part[0])
+        .join('');
+---
+
+{recommendations.length > 0 && (
+    <section class="mx-auto mb-10 max-w-container-max px-gutter py-section-gap" id="recomendaciones">
+        <div class="relative overflow-hidden rounded-[3rem] border border-outline-variant/20 bg-gradient-to-br from-surface-container-high/80 to-surface-container-low/40 p-10 shadow-2xl shadow-surface-variant/50 backdrop-blur-xl md:p-16">
+            <div class="absolute -right-10 -top-10 rotate-12 opacity-10">
+                <span class="material-symbols-outlined text-[15rem] text-primary">format_quote</span>
+            </div>
+
+            <div class="relative z-10 mx-auto max-w-4xl text-center" data-recommendation-carousel>
+                <span class="mb-6 block font-label-md text-label-md font-bold uppercase tracking-widest text-primary">
+                    Recomendaciones
+                </span>
+
+                <div class="relative min-h-[320px] md:min-h-[260px]">
+                    {recommendations.map((recommendation, index) => (
+                        <article
+                            data-recommendation-slide
+                            data-slide-index={index}
+                            class:list={[
+                                'absolute inset-0 flex flex-col items-center justify-center transition-all duration-500',
+                                index === 0 ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-4',
+                            ]}
+                        >
+                            <blockquote class="mb-12 font-headline-md text-xl font-medium leading-relaxed text-on-surface md:text-2xl">
+                                “{recommendation.quote}”
+                            </blockquote>
+
+                            <div class="flex flex-col items-center justify-center gap-4">
+                                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-tr from-primary to-secondary text-xl font-bold text-on-primary shadow-lg ring-4 ring-surface">
+                                    {getInitials(recommendation.name)}
+                                </div>
+                                <div>
+                                    <p class="font-headline-md text-headline-md text-on-surface">{recommendation.name}</p>
+                                    <p class="mt-1 font-label-sm text-label-sm text-on-surface-variant">{recommendation.role}</p>
+                                </div>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                <div class="mt-8 flex justify-center gap-2" aria-label="Selector de recomendaciones">
+                    {recommendations.map((recommendation, index) => (
+                        <button
+                            type="button"
+                            class:list={[
+                                'h-2.5 rounded-full transition-all',
+                                index === 0 ? 'w-8 bg-primary' : 'w-2.5 bg-outline-variant/70 hover:bg-primary/60',
+                            ]}
+                            data-recommendation-dot
+                            data-slide-index={index}
+                            aria-label={`Ver recomendación de ${recommendation.name}`}
+                            aria-current={index === 0 ? 'true' : 'false'}
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+)}
+
+<script>
+    function initRecommendationCarousel() {
+        const carousel = document.querySelector<HTMLElement>('[data-recommendation-carousel]');
+        if (!carousel) return;
+
+        const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-recommendation-slide]'));
+        const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-recommendation-dot]'));
+
+        if (slides.length <= 1) return;
+
+        let activeIndex = 0;
+        let timer: number | undefined;
+
+        const showSlide = (nextIndex: number) => {
+            activeIndex = nextIndex;
+
+            slides.forEach((slide, index) => {
+                const isActive = index === activeIndex;
+
+                slide.classList.toggle('opacity-100', isActive);
+                slide.classList.toggle('translate-y-0', isActive);
+                slide.classList.toggle('opacity-0', !isActive);
+                slide.classList.toggle('translate-y-4', !isActive);
+                slide.classList.toggle('pointer-events-none', !isActive);
+            });
+
+            dots.forEach((dot, index) => {
+                const isActive = index === activeIndex;
+
+                dot.classList.toggle('w-8', isActive);
+                dot.classList.toggle('bg-primary', isActive);
+                dot.classList.toggle('w-2.5', !isActive);
+                dot.classList.toggle('bg-outline-variant/70', !isActive);
+                dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+            });
+        };
+
+        const startTimer = () => {
+            window.clearInterval(timer);
+            timer = window.setInterval(() => {
+                showSlide((activeIndex + 1) % slides.length);
+            }, 6000);
+        };
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const nextIndex = Number(dot.dataset.slideIndex ?? 0);
+                showSlide(nextIndex);
+                startTimer();
+            });
+        });
+
+        startTimer();
+    }
+
+    initRecommendationCarousel();
+    document.addEventListener('astro:after-swap', initRecommendationCarousel);
+</script>

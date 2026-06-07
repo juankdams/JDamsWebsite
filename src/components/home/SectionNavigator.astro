@@ -1,0 +1,123 @@
+---
+const sections = [
+    { label: 'Presentación', href: '#presentacion', icon: 'person' },
+    { label: 'Resumen del perfil', href: '#profile-brief', icon: 'badge' },
+    { label: 'Experiencia laboral', href: '#experiencia', icon: 'work_history' },
+    { label: 'Educación', href: '#educacion', icon: 'school' },
+    { label: 'Stack técnico', href: '#technical-stack', icon: 'hub' },
+    { label: 'Hitos', href: '#hitos', icon: 'flag' },
+    { label: 'Voluntariado', href: '#voluntariado', icon: 'volunteer_activism' },
+    { label: 'Recomendaciones', href: '#recomendaciones', icon: 'format_quote' },
+];
+---
+
+<nav aria-label="Navegador de secciones" class="fixed bottom-3 left-1/2 z-40 w-[calc(100%-1rem)] max-w-md -translate-x-1/2 rounded-3xl border border-outline-variant/30 bg-surface/90 p-2 shadow-xl shadow-primary/5 backdrop-blur-xl lg:bottom-auto lg:left-auto lg:right-4 lg:top-1/2 lg:w-auto lg:max-w-none lg:-translate-x-0 lg:-translate-y-1/2 lg:rounded-2xl">
+    <ul class="flex items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-col lg:overflow-visible">
+        {sections.map((section) => (
+            <li class="shrink-0">
+                <a
+                    href={section.href}
+                    data-section-link={section.href.replace('#', '')}
+                    data-section-label-text={section.label}
+                    class="group flex h-11 min-w-11 items-center justify-center gap-2 rounded-2xl px-3 font-label-sm text-label-sm text-on-surface-variant transition hover:bg-surface-container-high hover:text-primary lg:h-auto lg:w-48 lg:justify-start lg:rounded-xl lg:py-2"
+                >
+                    <span class="material-symbols-outlined text-[1.25rem] text-primary/70 transition group-hover:text-primary lg:text-base" data-section-icon>
+                        {section.icon}
+                    </span>
+                    <span class="hidden lg:inline" data-section-label>{section.label}</span>
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<script>
+    function setActiveSection(sectionId: string) {
+        const links = document.querySelectorAll<HTMLAnchorElement>('[data-section-link]');
+
+        links.forEach((link) => {
+            const isActive = link.dataset.sectionLink === sectionId;
+            const icon = link.querySelector<HTMLElement>('[data-section-icon]');
+
+            link.classList.toggle('bg-primary', isActive);
+            link.classList.toggle('text-on-primary', isActive);
+            link.classList.toggle('shadow-sm', isActive);
+            link.classList.toggle('hover:bg-primary', isActive);
+            link.classList.toggle('hover:text-on-primary', isActive);
+            link.classList.toggle('hover:bg-surface-container-high', !isActive);
+            link.classList.toggle('hover:text-primary', !isActive);
+            link.classList.toggle('text-on-surface-variant', !isActive);
+            link.setAttribute('aria-current', isActive ? 'true' : 'false');
+
+            icon?.classList.toggle('text-on-primary', isActive);
+            icon?.classList.toggle('text-primary/70', !isActive);
+            icon?.classList.toggle('group-hover:text-on-primary', isActive);
+            icon?.classList.toggle('group-hover:text-primary', !isActive);
+        });
+    }
+
+    function initSectionNavigator() {
+        const navWindow = window as Window & { __sectionNavigatorCleanup?: () => void };
+        navWindow.__sectionNavigatorCleanup?.();
+
+        const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section-link]'));
+        const sections = links
+            .map((link) => document.getElementById(link.dataset.sectionLink ?? ''))
+            .filter((section): section is HTMLElement => Boolean(section));
+
+        if (sections.length === 0) return;
+
+        const controller = new AbortController();
+        let ticking = false;
+
+        const getCurrentSectionId = () => {
+            const marker = window.innerHeight * 0.42;
+            let currentSection = sections[0];
+
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+
+                if (rect.top <= marker) {
+                    currentSection = section;
+                }
+            });
+
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
+                currentSection = sections[sections.length - 1];
+            }
+
+            return currentSection.id;
+        };
+
+        const updateActiveSection = () => {
+            ticking = false;
+            setActiveSection(getCurrentSectionId());
+        };
+
+        const requestActiveUpdate = () => {
+            if (ticking) return;
+
+            ticking = true;
+            window.requestAnimationFrame(updateActiveSection);
+        };
+
+        links.forEach((link) => {
+            link.addEventListener(
+                'click',
+                () => {
+                    setActiveSection(link.dataset.sectionLink ?? sections[0].id);
+                },
+                { signal: controller.signal },
+            );
+        });
+
+        window.addEventListener('scroll', requestActiveUpdate, { passive: true, signal: controller.signal });
+        window.addEventListener('resize', requestActiveUpdate, { passive: true, signal: controller.signal });
+
+        updateActiveSection();
+        navWindow.__sectionNavigatorCleanup = () => controller.abort();
+    }
+
+    initSectionNavigator();
+    document.addEventListener('astro:after-swap', initSectionNavigator);
+</script>

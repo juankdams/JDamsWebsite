@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Juan Camilo Dams | DATA_ENGINEER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#fffbff",
+                "outline": "#6d7a72",
+                "on-surface": "#111c2d",
+                "on-surface-variant": "#3d4a42",
+                "tertiary": "#9b3e3b",
+                "primary-container": "#00855d",
+                "inverse-on-surface": "#ecf1ff",
+                "on-secondary": "#ffffff",
+                "on-secondary-fixed-variant": "#004e61",
+                "on-primary-container": "#f5fff7",
+                "surface-container": "#e7eeff",
+                "background": "#f9f9ff",
+                "primary-fixed-dim": "#68dba9",
+                "inverse-surface": "#263143",
+                "surface": "#f9f9ff",
+                "secondary-container": "#76dcff",
+                "surface-dim": "#cfdaf2",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-container-low": "#f0f3ff",
+                "outline-variant": "#bccac0",
+                "inverse-primary": "#68dba9",
+                "tertiary-fixed": "#ffdad7",
+                "on-tertiary-fixed": "#410004",
+                "on-background": "#111c2d",
+                "on-tertiary-fixed-variant": "#7f2928",
+                "on-primary-fixed": "#002114",
+                "secondary-fixed-dim": "#6cd3f7",
+                "surface-variant": "#d8e3fb",
+                "surface-bright": "#f9f9ff",
+                "on-secondary-fixed": "#001f28",
+                "surface-container-high": "#dee8ff",
+                "secondary": "#006780",
+                "primary": "#006948",
+                "on-primary": "#ffffff",
+                "error": "#ba1a1a",
+                "primary-fixed": "#85f8c4",
+                "on-error": "#ffffff",
+                "secondary-fixed": "#b7eaff",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed-variant": "#005137",
+                "surface-container-highest": "#d8e3fb",
+                "error-container": "#ffdad6",
+                "tertiary-fixed-dim": "#ffb3ae",
+                "tertiary-container": "#ba5551",
+                "surface-tint": "#006c4a",
+                "on-secondary-container": "#006077"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "2xl": "1rem",
+                "3xl": "1.5rem",
+                "4xl": "2rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "section-gap": "100px",
+                "gutter": "24px",
+                "margin-mobile": "20px",
+                "container-max": "1200px",
+                "component-gap": "16px",
+                "base": "4px",
+                "margin-desktop": "32px",
+                "xs": "4px",
+                "md": "16px",
+                "lg": "24px",
+                "sm": "8px",
+                "xl": "32px"
+        },
+        "fontFamily": {
+                "body-lg": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "label-md": ["Inter"],
+                "code-snippet": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-xl": ["Inter"],
+                "headline-xl-mobile": ["Inter"],
+                "label-sm": ["Inter"]
+        },
+        "fontSize": {
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "code-snippet": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "headline-xl": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-xl-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+        body {
+            background-color: #f9f9ff;
+            color: #111c2d;
+            font-family: 'Inter', sans-serif;
+        }
+        .mesh-bg {
+            background-color: #f9f9ff;
+            background-image: 
+                radial-gradient(at 10% 20%, hsla(158,100%,74%,0.15) 0px, transparent 40%),
+                radial-gradient(at 90% 10%, hsla(189,100%,56%,0.15) 0px, transparent 40%),
+                radial-gradient(at 40% 60%, hsla(158,100%,74%,0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, hsla(189,100%,56%,0.1) 0px, transparent 40%);
+            background-attachment: fixed;
+        }
+        .data-grid-overlay {
+            background-image: radial-gradient(circle, rgba(0, 105, 72, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .tech-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border-top: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px -5px rgba(0, 105, 72, 0.05);
+        }
+        .tech-card:hover {
+            box-shadow: 0 20px 40px -5px rgba(0, 105, 72, 0.1);
+            transform: translateY(-4px) scale(1.01);
+            border-top: 2px solid #006948;
+        }
+        .bento-card {
+            transition: all 0.3s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px -5px rgba(0, 105, 72, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+    </style>
+</head>
+<body class="selection:bg-primary-container selection:text-on-primary-container mesh-bg relative min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-surface/60 backdrop-blur-xl text-on-surface font-headline-md text-headline-md docked full-width top-0 sticky z-50 border-b border-outline-variant/20 flat no shadows">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-gutter h-20">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="bg-primary-container/20 p-2 rounded-2xl group-hover:bg-primary-container/40 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+</div>
+<span class="font-label-md text-label-md tracking-tighter text-primary font-bold">DATA_ENGINEER</span>
+</div>
+<div class="hidden md:flex gap-6 items-center bg-surface-container-low/50 px-8 py-3 rounded-full border border-outline-variant/20">
+<a class="text-primary font-bold" href="#about">About</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#skills">Skills</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#experience">Experience</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#hitos">Hitos</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#voluntariado">Voluntariado</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-2xl font-label-md text-label-md hover:scale-105 hover:shadow-lg hover:shadow-primary/20 duration-300 ease-out">Resume</button>
+</div>
+</div>
+</nav>
+<main class="data-grid-overlay overflow-hidden">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-gutter pt-24 pb-20 relative" id="about">
+<!-- Decorative background elements -->
+<div class="absolute top-10 right-10 w-64 h-64 bg-primary-fixed/20 rounded-full blur-3xl -z-10"></div>
+<div class="absolute bottom-10 left-10 w-72 h-72 bg-secondary-fixed/20 rounded-full blur-3xl -z-10"></div>
+<div class="flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 text-center md:text-left z-10 relative">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high border border-outline-variant/30 mb-8 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Available for new opportunities</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl mb-4 text-on-surface tracking-tight leading-tight">
+    Transforming Data into <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Strategic Assets</span>
+</h1>
+<p class="font-label-md text-label-md text-primary mb-8 uppercase tracking-[0.2em] font-bold">
+    Juan Camilo Dams • BI &amp; Data Engineer
+</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto md:mx-0 mb-10 leading-relaxed text-lg">
+    Ingeniero Industrial con experiencia en Análisis de Datos e Inteligencia de Negocios, especializado en arquitecturas robustas de ETL, automatización y visualización avanzada. Comprometido con la excelencia técnica y la resolución de problemas complejos.
+</p>
+</div>
+<div class="relative w-64 h-64 md:w-80 md:h-80 shrink-0 mx-auto z-10">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 blob-shape transform scale-105 -z-10"></div>
+<img alt="Juan Camilo Dams" class="w-full h-full object-cover blob-shape shadow-2xl border-4 border-surface" data-alt="A professional close-up portrait of Juan Camilo Dams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArd0nBF5z0s0CsFHmoMQfeBC2BSw7-KcZxbJesuGk8licLo-r-sz9U2oOHtANAk4yKcFQARQpZFHvwIBGTPf_s6M-kJihe4Z6VB_NhjQoGdGj-raNAyiVsNfoT_am3ohzFsg-UoLrf8z_Rgz7iJyAE-3ysxhAiY2ZAKSmY_tRFmzWEmmyqL8XsxHudGIPCD0jG89jr9nn3Ss6TVyD9jfQlV5sxBoxO3K9OygNMFoN0pdHBV4E6MuQi8EiNMBq9CSKR7m5uhXOZaeRr"/>
+</div>
+</div>
+</section>
+<!-- Technical Skills Grid (Moved up & Disruptive Bento Layout) -->
+<section class="max-w-container-max mx-auto px-gutter pb-section-gap relative z-20" id="skills">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+<!-- Big Featured Skill -->
+<div class="md:col-span-2 md:row-span-2 bg-gradient-to-br from-primary-container/30 to-surface-container-high p-8 md:p-10 rounded-4xl border border-primary-container/30 flex flex-col justify-between bento-card relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-40 h-40 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+<div>
+<span class="material-symbols-outlined text-primary text-5xl mb-6 bg-surface p-4 rounded-2xl shadow-sm" data-icon="cloud">cloud</span>
+<h3 class="font-headline-lg text-headline-lg mb-2">Cloud Data Warehousing</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Arquitecturas escalables y procesamiento distribuido para grandes volúmenes de datos.</p>
+</div>
+<div class="mt-8 flex items-center gap-3">
+<span class="px-4 py-2 bg-surface/80 backdrop-blur rounded-xl font-label-sm font-bold text-primary">BigQuery</span>
+<span class="px-4 py-2 bg-surface/80 backdrop-blur rounded-xl font-label-sm font-bold text-primary">GCP</span>
+</div>
+</div>
+<!-- Standard Skill -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-4xl border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:-translate-y-1 transition-transform" data-icon="database">database</span>
+<h3 class="font-headline-md text-headline-md mb-1">SQL</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-auto pt-4 border-t border-outline-variant/20">Oracle, PostgreSQL</p>
+</div>
+<!-- Standard Skill -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-4xl border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:-translate-y-1 transition-transform" data-icon="bar_chart">bar_chart</span>
+<h3 class="font-headline-md text-headline-md mb-1">Power BI</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-auto pt-4 border-t border-outline-variant/20">Data Visualization</p>
+</div>
+<!-- Wide Skill -->
+<div class="md:col-span-2 bg-gradient-to-r from-surface-container-low to-secondary-container/20 p-8 rounded-4xl border border-outline-variant/30 flex items-center gap-6 bento-card overflow-hidden relative group">
+<div class="absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-secondary-container/30 to-transparent"></div>
+<div class="bg-surface p-4 rounded-2xl shadow-sm z-10">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="z-10">
+<h3 class="font-headline-md text-headline-md mb-1">Astro Framework</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Static Site Generation &amp; Performance</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Section (Asymmetrical Layout) -->
+<section class="max-w-container-max mx-auto px-gutter py-section-gap relative" id="experience">
+<div class="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-outline-variant/30 to-transparent hidden lg:block -z-10"></div>
+<h2 class="font-headline-lg text-headline-lg mb-16 text-center text-on-surface relative inline-block left-1/2 -translate-x-1/2 bg-surface px-8 py-2 rounded-full border border-outline-variant/20 shadow-sm">
+    Experiencia Laboral
+</h2>
+<div class="space-y-16 relative">
+<!-- Role 1 - Offset Right -->
+<div class="lg:w-[85%] ml-auto relative">
+<div class="absolute -left-12 top-10 w-6 h-6 rounded-full bg-primary border-4 border-surface hidden lg:block z-10 shadow-md"></div>
+<div class="tech-card p-10 rounded-4xl border border-outline-variant/20 relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-32 h-32 bg-primary/5 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
+<div>
+<div class="flex items-center gap-4 mb-2">
+<span class="p-3 bg-primary-container/20 rounded-xl text-primary material-symbols-outlined" data-icon="analytics">analytics</span>
+<h3 class="font-headline-lg text-headline-md text-on-surface">Data Analyst</h3>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant ml-16">Commodo | Barranquilla, Atlántico</p>
+</div>
+<span class="px-5 py-2 bg-primary-container text-on-primary-container rounded-2xl h-fit font-label-sm text-label-sm font-bold shadow-sm">Jul 2023 - Actualidad</span>
+</div>
+<ul class="space-y-5 font-body-md text-body-md text-on-surface-variant ml-1 lg:ml-16">
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary/50 mt-0.5" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="leading-relaxed">Diseñar y mantener pipelines de datos robustos y escalables, asegurando información confiable para el negocio.</span>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary/50 mt-0.5" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="leading-relaxed">Colaborar con equipos multidisciplinarios para integrar procesos analíticos y optimizar modelos de datos.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Role 2 - Offset Left -->
+<div class="lg:w-[85%] mr-auto relative">
+<div class="absolute -right-12 top-10 w-6 h-6 rounded-full bg-secondary border-4 border-surface hidden lg:block z-10 shadow-md"></div>
+<div class="tech-card p-10 rounded-4xl border border-outline-variant/20 relative overflow-hidden group">
+<div class="absolute left-0 top-0 w-32 h-32 bg-secondary/5 rounded-br-full -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="flex flex-col lg:flex-row justify-between items-start gap-6 mb-8">
+<div>
+<div class="flex items-center gap-4 mb-2">
+<span class="p-3 bg-secondary-container/20 rounded-xl text-secondary material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<h3 class="font-headline-lg text-headline-md text-on-surface">Analista de Inteligencia de Negocios</h3>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant ml-16">Expreso Brasilia S.A. | Barranquilla, Colombia</p>
+</div>
+<span class="px-5 py-2 bg-surface-variant text-on-surface-variant rounded-2xl h-fit font-label-sm text-label-sm font-bold shadow-sm">Oct 2021 - Jul 2023</span>
+</div>
+<ul class="space-y-5 font-body-md text-body-md text-on-surface-variant ml-1 lg:ml-16">
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary/50 mt-0.5" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="leading-relaxed">Implementar procesos de ETL y estrategias de automatización para optimizar tiempos de análisis.</span>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-secondary/50 mt-0.5" data-icon="arrow_right_alt">arrow_right_alt</span>
+<span class="leading-relaxed">Transformar datos en informes dinámicos y dashboards en Power BI, asegurando visualizaciones claras para la toma de decisiones.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Hitos Section -->
+<section class="max-w-container-max mx-auto px-gutter py-section-gap relative z-20" id="hitos">
+<h2 class="font-headline-lg text-headline-lg mb-16 text-center text-on-surface relative inline-block left-1/2 -translate-x-1/2 bg-surface px-8 py-2 rounded-full border border-outline-variant/20 shadow-sm">
+        Hitos
+    </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Item 1 -->
+<div class="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="px-4 py-1.5 bg-primary-container/20 text-primary rounded-full font-label-sm text-label-sm font-bold w-fit mb-6">Performance Optimization</span>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface group-hover:text-primary transition-colors">Reducción del 40% en tiempos de consulta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Implementación de particionamiento y clustering en BigQuery, optimizando el consumo de recursos y acelerando la generación de reportes críticos.</p>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-primary-container transition-colors mt-auto font-bold" href="#">
+                Leer más <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="px-4 py-1.5 bg-secondary-container/30 text-secondary rounded-full font-label-sm text-label-sm font-bold w-fit mb-6">Data Migration</span>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface group-hover:text-primary transition-colors">Migración exitosa a Cloud Data Warehouse</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Lideré la migración de bases de datos on-premise a GCP, asegurando cero pérdida de datos y mejorando la disponibilidad del sistema al 99.9%.</p>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-primary-container transition-colors mt-auto font-bold" href="#">
+                Leer más <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="px-4 py-1.5 bg-tertiary-container/20 text-tertiary rounded-full font-label-sm text-label-sm font-bold w-fit mb-6">Automation</span>
+<h3 class="font-headline-md text-headline-md mb-3 text-on-surface group-hover:text-primary transition-colors">Automatización de pipeline ETL</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">Diseño y despliegue de un pipeline automatizado con Apache Airflow, eliminando 15 horas semanales de trabajo manual del equipo de analítica.</p>
+<a class="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:text-primary-container transition-colors mt-auto font-bold" href="#">
+                Leer más <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Education & Certifications (Overlapping / Floating feel) -->
+<section class="max-w-container-max mx-auto px-gutter py-section-gap relative">
+<div class="bg-surface-container-low/50 backdrop-blur-md rounded-[3rem] p-8 md:p-16 border border-outline-variant/30 shadow-xl shadow-primary-container/5 relative overflow-hidden">
+<div class="absolute -top-40 -right-40 w-96 h-96 bg-secondary-fixed/20 rounded-full blur-3xl -z-10"></div>
+<div class="grid md:grid-cols-2 gap-16 relative z-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-10 flex items-center gap-4 text-on-surface">
+<span class="p-3 bg-surface rounded-2xl shadow-sm material-symbols-outlined text-primary" data-icon="school">school</span>
+        Educación
+    </h2>
+<div class="space-y-8 relative before:absolute before:inset-y-0 before:left-[11px] before:w-[2px] before:bg-gradient-to-b before:from-primary/30 before:to-transparent">
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-surface border-4 border-primary shadow-sm"></div>
+<span class="font-label-sm text-label-sm text-primary font-bold tracking-wider">2015 - 2024</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mt-1">Ingeniería Industrial</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Universidad del Atlántico</p>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-surface border-4 border-primary/40 shadow-sm"></div>
+<span class="font-label-sm text-label-sm text-primary/70 font-bold tracking-wider">2020 - 2021</span>
+<h4 class="font-headline-md text-headline-md text-on-surface mt-1">Diplomado de Programación</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Universidad del Norte</p>
+</div>
+</div>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-10 flex items-center gap-4 text-on-surface">
+<span class="p-3 bg-surface rounded-2xl shadow-sm material-symbols-outlined text-secondary" data-icon="workspace_premium">workspace_premium</span>
+        Certificaciones
+    </h2>
+<div class="flex flex-wrap gap-4">
+<div class="group relative bg-surface px-6 py-4 rounded-2xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<span class="font-label-md text-label-md text-on-surface relative z-10">Scrum Foundation Professional</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+</div>
+<div class="group relative bg-surface px-6 py-4 rounded-2xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<span class="font-label-md text-label-md text-on-surface relative z-10">Auditor Interno en Sistemas Integrados</span>
+<div class="absolute inset-0 bg-gradient-to-r from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+</div>
+<div class="group relative bg-surface px-6 py-4 rounded-2xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<span class="font-label-md text-label-md text-on-surface relative z-10">Business Intelligence Foundation</span>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Volunteering Section -->
+<section class="max-w-container-max mx-auto px-gutter pb-section-gap relative z-20" id="voluntariado">
+<h2 class="font-headline-lg text-headline-lg mb-16 text-center text-on-surface relative inline-block left-1/2 -translate-x-1/2 bg-surface px-8 py-2 rounded-full border border-outline-variant/20 shadow-sm">
+        Voluntariado
+    </h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+<!-- Big Card -->
+<div class="md:col-span-2 md:row-span-2 bg-gradient-to-br from-secondary-container/30 to-surface-container-high p-8 md:p-10 rounded-4xl border border-secondary-container/30 flex flex-col justify-between bento-card relative overflow-hidden group">
+<div class="absolute -right-8 -top-8 w-40 h-40 bg-secondary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+<div>
+<span class="material-symbols-outlined text-secondary text-5xl mb-6 bg-surface p-4 rounded-2xl shadow-sm" data-icon="volunteer_activism">volunteer_activism</span>
+<h3 class="font-headline-lg text-headline-lg mb-2 text-on-surface">Tech Mentor</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-4">Mentoría a estudiantes universitarios en temas de análisis de datos y programación, guiándolos en sus primeros pasos profesionales.</p>
+</div>
+<div class="mt-4">
+<span class="font-label-sm text-label-sm text-secondary font-bold">Ene 2022 - Presente</span>
+</div>
+</div>
+<!-- Wide Card -->
+<div class="md:col-span-2 bg-surface-container-low p-8 rounded-4xl border border-outline-variant/30 flex flex-col justify-center bento-card group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4 mb-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="group">group</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Coordinador de Proyectos Sociales</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Organización de eventos comunitarios orientados a la alfabetización digital en zonas vulnerables.</p>
+<span class="font-label-sm text-label-sm text-primary font-bold">Mar 2021 - Dic 2021</span>
+</div>
+<!-- Standard Card 1 -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-4xl border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-tertiary text-4xl mb-4 group-hover:-translate-y-1 transition-transform" data-icon="public">public</span>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Data for Good</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Análisis voluntario para ONGs locales.</p>
+<span class="font-label-sm text-label-sm text-tertiary font-bold mt-auto">2023</span>
+</div>
+<!-- Standard Card 2 -->
+<div class="md:col-span-1 bg-surface-container-low p-8 rounded-4xl border border-outline-variant/30 flex flex-col bento-card group hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 group-hover:-translate-y-1 transition-transform" data-icon="eco">eco</span>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Reforestación</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4 flex-grow">Jornadas de siembra de árboles en la región.</p>
+<span class="font-label-sm text-label-sm text-primary font-bold mt-auto">2020 - 2022</span>
+</div>
+</div>
+</section>
+<!-- Recommendation Section -->
+<section class="max-w-container-max mx-auto px-gutter py-section-gap mb-10">
+<div class="bg-gradient-to-br from-surface-container-high/80 to-surface-container-low/40 p-10 md:p-16 rounded-[3rem] border border-outline-variant/20 relative overflow-hidden backdrop-blur-xl shadow-2xl shadow-surface-variant/50">
+<div class="absolute -top-10 -right-10 opacity-10 transform rotate-12">
+<span class="material-symbols-outlined text-[15rem] text-primary" data-icon="format_quote">format_quote</span>
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase font-bold mb-6 block">Recomendaciones</span>
+<blockquote class="font-headline-md md:text-2xl text-on-surface mb-12 leading-relaxed font-medium">
+        "Un líder muy objetivo, con una gran capacidad de análisis y evaluación. Su enfoque técnico y su capacidad para automatizar procesos complejos han sido fundamentales para nuestro equipo."
+    </blockquote>
+<div class="flex flex-col items-center justify-center gap-4">
+<div class="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-secondary text-on-primary flex items-center justify-center font-bold text-xl shadow-lg ring-4 ring-surface">JZ</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Johan Zuluaga Pulido</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Proyectos y Desarrollo de Negocios en Expreso Brasilia</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface text-inverse-on-surface full-width py-16 relative overflow-hidden rounded-t-[3rem] mt-10">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-50"></div>
+<div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto px-gutter gap-8 relative z-10">
+<div class="text-center md:text-left flex flex-col items-center md:items-start">
+<div class="flex items-center gap-2 mb-4 opacity-80">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-label-md text-label-md font-bold tracking-widest uppercase">DATA_ENGINEER</span>
+</div>
+<p class="font-body-md text-body-md text-inverse-on-surface/70">© 2024 Juan Camilo Dams. Built for High-Availability Data Systems.</p>
+</div>
+<div class="flex gap-6 bg-white/5 p-4 rounded-3xl backdrop-blur-sm border border-white/10">
+<a class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-inverse-on-surface" href="#" title="LinkedIn">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</a>
+<a class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-inverse-on-surface" href="#" title="GitHub">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+</a>
+<a class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors text-inverse-on-surface" href="#" title="Email">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</a>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Interactive effect for bento cards
+        const cards = document.querySelectorAll('.bento-card, .tech-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

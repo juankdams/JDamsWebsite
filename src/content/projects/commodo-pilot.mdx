@@ -1,0 +1,121 @@
+---
+title: Commodo Pilot
+summary: Diseño de una capa de inteligencia de negocios para un producto SaaS de fidelización, usando BigQuery y procedimientos almacenados para responder datos puntuales al front end sin trasladar un modelo semántico al aplicativo.
+tags:
+    - BigQuery
+    - SQL
+    - SaaS
+    - APIs
+    - Business Intelligence
+    - Stored Procedures
+startDate: 2025-10-01
+endDate: 2026-06-06
+author: Juan Camilo Dams
+url: "#"
+cover: './images/budget-wise/finance_app_concept.webp'
+ogImage: './images/budget-wise/og-finance_app.webp'
+---
+
+<section className="project-canvas not-prose">
+  <div className="project-canvas-panel">
+    <p className="font-label-sm text-label-sm font-bold uppercase tracking-[0.18em] text-primary">Contexto</p>
+    <h2 className="mt-2 text-2xl font-bold text-on-surface">BI embebido para comercios aliados</h2>
+    <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+      En mi primer año de experiencia en Commodo, se me asignó un nuevo proyecto llamado <strong>Commodo Pilot</strong>: un producto SaaS diseñado para complementar el programa de fidelización.
+    </p>
+    <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+      El fuerte del producto es la inteligencia de negocios. Su objetivo es mostrar al comercio aliado datos de vital importancia para evaluar el estado de su negocio en función de los hábitos del cliente.
+    </p>
+
+    <div className="mt-5 rounded-2xl bg-surface-container-high p-4">
+      <h3 className="text-sm font-bold text-on-surface">Reto técnico</h3>
+      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+        Ingestar desde BigQuery la data de inteligencia de negocios del warehouse sin aumentar el costo de infraestructura, manteniendo una solución escalable y fácil de sostener.
+      </p>
+    </div>
+  </div>
+
+  <figure className="project-canvas-flow">
+    <div role="img" aria-labelledby="pilot-flow-title" aria-describedby="pilot-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
+      <div>
+        <h3 id="pilot-flow-title" className="text-xl font-bold text-on-surface">Arquitectura funcional</h3>
+        <p id="pilot-flow-desc" className="mt-1 text-sm text-on-surface-variant">
+          El aplicativo solicita datos puntuales, BigQuery resuelve la lógica y el front end recibe respuestas listas para renderizar.
+        </p>
+      </div>
+
+      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.15fr] xl:items-center">
+        <div className="project-flow-card">
+          <span>1</span>
+          <strong>Warehouse</strong>
+          <p>Datos analíticos<br />en BigQuery</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>2</span>
+          <strong>Procedimientos</strong>
+          <p>Parámetros desde<br />el aplicativo</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>3</span>
+          <strong>API</strong>
+          <p>Consulta puntual<br />por componente</p>
+        </div>
+
+        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
+
+        <div className="project-flow-card">
+          <span>4</span>
+          <strong>Front end</strong>
+          <p>Respuesta lista<br />para visualizar</p>
+          <em>BI embebido</em>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.85fr]">
+        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
+          <strong className="block text-base font-bold text-on-surface">Sin duplicar modelo semántico</strong>
+          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">La lógica vive en BigQuery y responde por demanda</span>
+        </div>
+
+        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
+          <strong className="block text-base font-bold">Escalable y mantenible</strong>
+          <span className="mt-1 block text-sm text-white/80">Menor presión sobre infraestructura</span>
+        </div>
+      </div>
+    </div>
+    <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
+      Flujo general: warehouse en BigQuery, procedimientos almacenados parametrizables, API del producto y visualización en el front end.
+    </figcaption>
+  </figure>
+
+  <div className="project-canvas-panel">
+    <p className="font-label-sm text-label-sm font-bold uppercase tracking-[0.18em] text-primary">Solución</p>
+    <div className="project-canvas-kpis mt-4">
+      <div className="project-kpi">
+        <strong>BI</strong>
+        <span>datos clave para que el comercio aliado evalúe el estado de su negocio.</span>
+      </div>
+      <div className="project-kpi">
+        <strong>SQL</strong>
+        <span>procedimientos almacenados para responder consultas parametrizadas.</span>
+      </div>
+      <div className="project-kpi">
+        <strong>API</strong>
+        <span>integración entre base de datos, backend y componentes del aplicativo.</span>
+      </div>
+    </div>
+
+    <div className="mt-5">
+      <h3 className="text-sm font-bold text-on-surface">Aprendizaje</h3>
+      <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+        Este proyecto me permitió profundizar en estructuras de desarrollo web, APIs, automatizaciones en base de datos y diseño de soluciones escalables según la necesidad del negocio.
+      </p>
+    </div>
+  </div>
+</section>

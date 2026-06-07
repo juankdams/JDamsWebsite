@@ -1,0 +1,134 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface Experience {
+    title: string;
+    company: string;
+    location: string;
+    period: string;
+    current: boolean;
+    icon: string;
+    accent: 'primary' | 'secondary';
+    summary: string;
+    technologies: {
+        name: string;
+        icon: string;
+    }[];
+    bullets: string[];
+}
+
+interface Props {
+    experience: Experience[];
+}
+
+const { experience } = Astro.props;
+
+const getAccent = (accent: Experience['accent']) => {
+    return accent === 'primary'
+        ? {
+            icon: 'bg-primary-container/20 text-primary',
+            bullet: 'text-primary/60',
+            dot: 'bg-primary',
+            period: 'bg-primary-container text-on-primary-container',
+            corner: 'bg-primary/5',
+        }
+        : {
+            icon: 'bg-secondary-container/20 text-secondary',
+            bullet: 'text-secondary/60',
+            dot: 'bg-secondary',
+            period: 'bg-surface-variant text-on-surface-variant',
+            corner: 'bg-secondary/5',
+        };
+};
+---
+
+<section class="relative mx-auto max-w-container-max px-gutter py-section-gap" id="experiencia">
+    <div class="absolute bottom-0 left-1/2 top-24 -z-10 hidden w-px bg-gradient-to-b from-transparent via-outline-variant/30 to-transparent lg:block"></div>
+
+    <SectionHeading
+        eyebrow="Trayectoria"
+        title="Experiencia Laboral"
+        description="Un recorrido por roles donde la analítica se convierte en procesos, productos de datos y decisiones accionables."
+    />
+
+    <div class="relative space-y-16">
+        {experience.map((role, index) => {
+            const accent = getAccent(role.accent);
+            const isRight = index % 2 === 0;
+
+            return (
+                <article class:list={[
+                    'relative lg:w-[85%]',
+                    isRight ? 'ml-auto' : 'mr-auto',
+                ]}>
+                    <div class:list={[
+                        'absolute top-10 z-10 hidden h-6 w-6 rounded-full border-4 border-surface shadow-md lg:block',
+                        isRight ? '-left-12' : '-right-12',
+                        accent.dot,
+                    ]}></div>
+
+                    <div class="tech-card group relative overflow-hidden rounded-4xl border border-outline-variant/20 p-8 md:p-10">
+                        <div class:list={[
+                            'absolute top-0 -z-10 h-32 w-32 transition-transform group-hover:scale-110',
+                            isRight ? 'right-0 rounded-bl-full' : 'left-0 rounded-br-full',
+                            accent.corner,
+                        ]}></div>
+
+                        <div class="mb-8 flex flex-col items-start justify-between gap-6 lg:flex-row">
+                            <div>
+                                <div class="mb-2 flex items-center gap-4">
+                                    <span class:list={[
+                                        'material-symbols-outlined rounded-xl p-3',
+                                        accent.icon,
+                                    ]}>{role.icon}</span>
+                                    <h3 class="font-headline-md text-headline-md text-on-surface">
+                                        {role.title}
+                                    </h3>
+                                </div>
+                                <p class="font-label-md text-label-md text-on-surface-variant md:ml-16">
+                                    {role.company} | {role.location}
+                                </p>
+                            </div>
+
+                            <span class:list={[
+                                'h-fit rounded-lg px-5 py-2 font-label-sm text-label-sm font-bold shadow-sm',
+                                accent.period,
+                            ]}>
+                                {role.period}
+                            </span>
+                        </div>
+
+                        <p class="mb-6 font-body-md text-body-md text-on-surface-variant md:ml-16">
+                            {role.summary}
+                        </p>
+
+                        <ul class="space-y-5 font-body-md text-body-md text-on-surface-variant md:ml-16">
+                            {role.bullets.map((bullet) => (
+                                <li class="flex items-start gap-4">
+                                    <span class:list={[
+                                        'material-symbols-outlined mt-0.5',
+                                        accent.bullet,
+                                    ]}>arrow_right_alt</span>
+                                    <span class="leading-relaxed">{bullet}</span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div class="mt-8 grid grid-cols-3 gap-4 opacity-45 grayscale md:ml-16">
+                            {role.technologies.map((technology) => (
+                                <div class="flex items-center justify-center gap-2 text-center">
+                                    <span class="material-symbols-outlined text-xl text-on-surface-variant">
+                                        {technology.icon}
+                                    </span>
+                                    <span class="block truncate font-label-sm text-label-sm font-semibold text-on-surface-variant">
+                                        {technology.name}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </article>
+            );
+        })}
+    </div>
+</section>

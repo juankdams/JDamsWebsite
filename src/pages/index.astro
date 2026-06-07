@@ -1,25 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProfileInfo from "../components/ProfileInfo.astro";
-import ProfileActionButton from "../components/ProfileActionButton.astro";
-import TabsButtons from "../components/TabsButtons.tsx";
-import ProjectsCC from '@/components/ProjectsCC.astro';
-import AboutMeCC from "../components/AboutMeCC.astro";
-import ProfileFacts from "../components/ProfileFacts.astro";
-import TestimonialsSection from '@/components/TestimonialsSection.astro';
-import BackToTopButton from "../components/BackToTopButton.astro";
+import { getCollection, getEntry, render } from 'astro:content';
+import HeroSection from '@/components/home/HeroSection.astro';
+import AboutNarrative from '@/components/home/AboutNarrative.astro';
+import SkillsBento from '@/components/home/SkillsBento.astro';
+import ExperienceTimeline from '@/components/home/ExperienceTimeline.astro';
+import MilestonesGrid from '@/components/home/MilestonesGrid.astro';
+import EducationCertifications from '@/components/home/EducationCertifications.astro';
+import VolunteeringBento from '@/components/home/VolunteeringBento.astro';
+import RecommendationPanel from '@/components/home/RecommendationPanel.astro';
+import SectionNavigator from '@/components/home/SectionNavigator.astro';
+
+const profile = await getEntry('profile', 'home');
+
+if (!profile) {
+    throw new Error('Profile home content was not found.');
+}
+
+const { Content } = await render(profile);
+const {
+    hero,
+    skills,
+    experience,
+    education,
+    certifications,
+    volunteering,
+    recommendations,
+} = profile.data;
+
+const projectArticles = (await getCollection('projects'))
+    .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());
 ---
 
-<Layout title="Juan Camilo Dams | Inteligencia de Negocios" description="Portafolio profesional de Juan Camilo Dams, especialista en inteligencia de negocios y análisis de datos." scrollSmooth={false}>
-    <>
-        <ProfileInfo/>
-        <ProfileFacts/>
-        <ProfileActionButton/>
-        <TabsButtons client:idle>
-            <AboutMeCC slot="about"/>
-            <ProjectsCC slot="portfolio"/>
-        </TabsButtons>
-        <TestimonialsSection />
-        <BackToTopButton />
-    </>
+<Layout title="Juan Camilo Dams | Ingeniero de Datos y Analista BI" description="Portafolio profesional de Juan Camilo Dams, especialista en inteligencia de negocios, arquitectura de datos y automatización." scrollSmooth={true} fullWidth>
+    <div>
+        <HeroSection hero={hero} />
+        <AboutNarrative Content={Content} />
+        <ExperienceTimeline experience={experience} />
+        <EducationCertifications education={education} certifications={certifications} />
+        <SkillsBento skills={skills} />
+        <MilestonesGrid articles={projectArticles} />
+        <VolunteeringBento volunteering={volunteering} />
+        <RecommendationPanel recommendations={recommendations} />
+        <SectionNavigator />
+    </div>
 </Layout>

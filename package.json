@@ -35,18 +35,22 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "overrides": {
+    "yaml-language-server": {
+      "yaml": "^2.8.3"
+    }
+  },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.0.2",
-    "@astrojs/react": "^4.1.1",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.3",
+    "@astrojs/check": "^0.9.2",
+    "@astrojs/mdx": "^6.0.2",
+    "@astrojs/react": "^5.0.7",
+    "@astrojs/sitemap": "^3.7.3",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.2.5",
     "@radix-ui/react-tabs": "^1.1.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "astro": "^5.0.9",
+    "astro": "^6.4.4",
     "astro-icon": "^1.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -60,6 +64,7 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15"
+    "@tailwindcss/typography": "^0.5.15",
+    "autoprefixer": "^10.5.0"
   }
 }

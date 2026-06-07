@@ -1,25 +1,44 @@
 ---
-// component imports
-import { menu } from "../data/menu";
-import { SITE } from "../config";
-import { ThemeSwitch } from "./ui/theme-switch.tsx";
-import Logo from "./icons/Logo.astro";
+import { ME } from '@/config';
 
 const pathname = Astro.url.pathname;
+const isHome = pathname === '/';
+const prefix = isHome ? '' : '/';
+const resume = `/${ME.contactInfo.resumeDoc}`;
+
+const anchorItems = [
+  { label: 'Presentación', href: `${prefix}#presentacion` },
+  { label: 'Experiencia', href: `${prefix}#experiencia` },
+  { label: 'Educación', href: `${prefix}#educacion` },
+  { label: 'Stack', href: `${prefix}#technical-stack` },
+  { label: 'Hitos', href: `${prefix}#hitos` },
+];
+
+const routeItems = [
+  { label: 'Proyectos', href: '/projects' },
+  { label: 'Artículos', href: '/blog' },
+];
 ---
 
-<nav class="fixed w-full z-20 top-0 start-0 flex justify-center items-center pointer-events-none">
-  <div class="bg-white/60 dark:bg-n700/60 backdrop-blur border border-gray-200 dark:border-gray-700 rounded-full shadow-sm mt-4 mx-auto max-w-5xl px-6 py-2 w-full flex items-center justify-between pointer-events-auto">
-    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <Logo />
+<nav class="fixed start-0 top-0 z-50 flex w-full items-center justify-center border-b border-outline-variant/20 bg-surface/70 text-on-surface backdrop-blur-xl">
+  <div class="mx-auto flex h-20 w-full max-w-container-max items-center justify-between px-gutter">
+    <a href="/" class="group flex items-center gap-2">
+      <div class="rounded-2xl bg-primary-container/20 p-2 transition-colors group-hover:bg-primary-container/40">
+        <span class="material-symbols-outlined text-primary">terminal</span>
+      </div>
+      <span class="font-label-md text-label-md font-bold tracking-tighter text-primary">ING_DATOS</span>
     </a>
-    <div class="flex-1 flex justify-center">
-      <ul class="hidden md:flex flex-row items-center gap-6 text-gray-700 dark:text-gray-200 font-medium">
-        {menu.map((item) => (
+
+    <div class="hidden items-center gap-6 rounded-full border border-outline-variant/20 bg-surface-container-low/50 px-8 py-3 md:flex">
+      <ul class="flex flex-row items-center gap-6 font-body-md text-body-md">
+        {anchorItems.map((item, index) => (
           <li>
             <a
               href={item.href}
-              class={`py-2 px-3 transition-colors duration-200 border-b-2 border-transparent hover:border-primary-light dark:hover:border-primary-dark hover:text-primary-light dark:hover:text-primary-dark${pathname === item.href ? ' active' : ''}`}
+              class:list={[
+                'font-medium transition-colors hover:text-primary',
+                index === 0 && isHome ? 'font-bold text-primary' : 'text-on-surface-variant',
+              ]}
             >
               {item.label}
             </a>
@@ -27,39 +46,54 @@ const pathname = Astro.url.pathname;
         ))}
       </ul>
     </div>
-    <div class="flex items-center gap-4">
-      <ThemeSwitch client:only="react" />
+
+    <div class="flex items-center gap-3">
+      <div class="hidden items-center gap-3 lg:flex">
+        {routeItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'font-label-md text-label-md transition-colors hover:text-primary',
+              pathname.startsWith(item.href) ? 'text-primary' : 'text-on-surface-variant',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <a class="hidden rounded-lg bg-primary px-5 py-2.5 font-label-md text-label-md text-on-primary transition hover:bg-primary-container md:inline-flex" href={resume} target="_blank" rel="noopener noreferrer">
+        Hoja de vida
+      </a>
       <button id="btn-menu" data-collapse-toggle="navbar-sticky" type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-on-surface-variant transition hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary/30 md:hidden"
         aria-controls="navbar-sticky" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <span class="sr-only">Abrir menú principal</span>
+        <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
         </svg>
       </button>
     </div>
   </div>
-  <div class="md:hidden absolute top-full left-0 w-full bg-white/90 dark:bg-n700/90 backdrop-blur border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-2xl shadow-md transition-all duration-300 hidden" id="navbar-sticky">
+  <div class="absolute left-0 top-full hidden w-full border border-t-0 border-outline-variant/20 bg-surface/95 shadow-md backdrop-blur md:hidden" id="navbar-sticky">
     <ul class="flex flex-col items-center gap-4 py-4">
-      {menu.map((item) => (
+      {[...anchorItems, ...routeItems].map((item) => (
         <li>
           <a
             href={item.href}
-            class={`py-2 px-4 transition-colors duration-200 border-b-2 border-transparent hover:border-primary-light dark:hover:border-primary-dark hover:text-primary-light dark:hover:text-primary-dark${pathname === item.href ? ' active' : ''}`}
+            class="px-4 py-2 font-body-md text-body-md text-on-surface-variant transition-colors hover:text-primary"
           >
             {item.label}
           </a>
         </li>
       ))}
+      <li>
+        <a class="inline-flex rounded-lg bg-primary px-5 py-2.5 font-label-md text-label-md text-on-primary transition hover:bg-primary-container" href={resume} target="_blank" rel="noopener noreferrer">
+          Hoja de vida
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
-
-<style>
-  .active {
-    @apply text-primary-light dark:text-primary-dark font-semibold border-b-2 border-primary-light dark:border-primary-dark;
-  }
-</style>
 
 <script>
   function toggleNav() {
@@ -67,6 +101,9 @@ const pathname = Astro.url.pathname;
     const navbar = document.getElementById('navbar-sticky');
     btnMenu?.addEventListener('click', function () {
       navbar?.classList.toggle('hidden');
+    });
+    navbar?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => navbar.classList.add('hidden'));
     });
   }
   toggleNav();

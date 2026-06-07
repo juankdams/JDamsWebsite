@@ -1,0 +1,51 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+interface ProjectArticle {
+    id: string;
+    data: {
+        title: string;
+        summary: string;
+        tags: string[];
+        startDate: Date;
+    };
+}
+
+interface Props {
+    articles: ProjectArticle[];
+}
+
+const { articles } = Astro.props;
+const accentClasses = ['bg-primary-container/20 text-primary', 'bg-secondary-container/30 text-secondary', 'bg-tertiary-container/20 text-tertiary'];
+---
+
+<section class="relative z-20 mx-auto max-w-container-max px-gutter py-section-gap" id="hitos">
+    <SectionHeading
+        eyebrow="Hitos"
+        title="Resultados Que Construyen Confianza"
+        description="Casos y logros que conectan arquitectura de datos, automatización y decisiones de negocio."
+    />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {articles.map((article, index) => (
+            <article class="bento-card group flex flex-col rounded-4xl border border-outline-variant/30 bg-surface-container-low p-8 transition-colors hover:bg-surface-container-high">
+                <span class:list={[
+                    'mb-6 w-fit rounded-lg px-4 py-1.5 font-label-sm text-label-sm font-bold',
+                    accentClasses[index % accentClasses.length],
+                ]}>
+                    {article.data.tags[0] ?? 'Proyecto'}
+                </span>
+                <h3 class="mb-3 font-headline-md text-headline-md text-on-surface transition-colors group-hover:text-primary">
+                    {article.data.title}
+                </h3>
+                <p class="mb-8 flex-grow font-body-md text-body-md text-on-surface-variant">
+                    {article.data.summary}
+                </p>
+                <a class="mt-auto inline-flex items-center gap-2 font-label-md text-label-md font-bold text-primary transition-colors hover:text-primary-container" href={`/projects/${article.id}`}>
+                    Leer caso
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </article>
+        ))}
+    </div>
+</section>

@@ -1,0 +1,23 @@
+---
+interface Props {
+    Content: any;
+}
+
+const { Content } = Astro.props;
+---
+
+<section class="mx-auto max-w-container-max px-gutter pb-section-gap" id="profile-brief">
+    <div class="grid gap-8 rounded-4xl border border-outline-variant/30 bg-surface-container-low/60 p-8 backdrop-blur md:grid-cols-[0.8fr_1.2fr] md:p-10">
+        <div>
+            <span class="mb-4 block font-label-md text-label-md uppercase tracking-[0.2em] text-primary">
+                Resumen del perfil
+            </span>
+            <h2 class="font-headline-lg text-headline-lg-mobile text-on-surface md:text-headline-lg">
+                Arquitectura de datos con criterio de negocio
+            </h2>
+        </div>
+        <div class="prose max-w-none font-body-lg text-body-lg text-on-surface-variant">
+            <Content />
+        </div>
+    </div>
+</section>
