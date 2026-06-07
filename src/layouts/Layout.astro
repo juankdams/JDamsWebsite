@@ -1,6 +1,6 @@
 ---
 import {ClientRouter} from 'astro:transitions';
-import {cn} from "../lib/utils";
+import {cn, withBase} from "../lib/utils";
 import '@/styles/globals.css'
 
 import Footer from "../components/Footer.astro";
@@ -28,6 +28,10 @@ const {
     imageOg = SITE.ogImage,
     fullWidth = false,
 } = Astro.props;
+
+const ogImageUrl = imageOg.startsWith('/')
+    ? new URL(withBase(imageOg), Astro.site).href
+    : imageOg;
 ---
 
 <!doctype html>
@@ -42,8 +46,8 @@ const {
     <meta name="description" content={description}/>
     <meta name="keywords" content={tags.join(', ')}/>
     <meta name="author" content={author}/>
-    <link rel="sitemap" href="/sitemap-index.xml"/>
-    <link rel="icon" href={SITE.favicon}/>
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')}/>
+    <link rel="icon" href={withBase(SITE.favicon)}/>
     <link rel="canonical" href={canonicalURL}/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -53,13 +57,13 @@ const {
     <meta property="og:title" content={title}/>
     <meta property="og:description" content={description}/>
     <meta property="og:url" content={canonicalURL}/>
-    <meta property="og:image" content={imageOg}/>
+    <meta property="og:image" content={ogImageUrl}/>
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image"/>
     <meta property="twitter:url" content={canonicalURL}/>
     <meta property="twitter:title" content={title}/>
     <meta property="twitter:description" content={description}/>
-    <meta property="twitter:image" content={imageOg}/>
+    <meta property="twitter:image" content={ogImageUrl}/>
 
     <title>{title}</title>
     <ClientRouter/>

@@ -5,6 +5,7 @@ import {getCollection} from "astro:content";
 // components imports
 import ProjectCard from "./ProjectCard.astro";
 import {buttonVariants} from "./ui/button";
+import { withBase } from '@/lib/utils';
 
 const allProjects = (await getCollection('projects'))
     .sort((a, b) => b.data.startDate.getTime() - a.data.startDate.getTime());;
@@ -31,7 +32,7 @@ const allProjects = (await getCollection('projects'))
         </div>
     </section>
     <div class="flex justify-center mt-10">
-        <a href="/projects" class={buttonVariants({ variant: "default" }) + "text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark"}>
+        <a href={withBase('/projects/')} class={buttonVariants({ variant: "default" }) + "text-n700 bg-primary-light dark:bg-primary-dark hover:bg-primary-hover-light dark:hover:bg-primary-hover-dark"}>
             Ver todos los proyectos
         </a>
     </div>

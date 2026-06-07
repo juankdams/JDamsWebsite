@@ -11,6 +11,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/** Prefixes an internal path with Astro's configured base (e.g. /JDamsWebsite/). */
+export function withBase(path: string): string {
+  const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${import.meta.env.BASE_URL}${normalizedPath}`;
+}
+
 
 /**
  * Formats the given datetime value into a localized date string.

@@ -1,5 +1,6 @@
 ---
 import SectionHeading from './SectionHeading.astro';
+import { withBase } from '@/lib/utils';
 
 interface ProjectArticle {
     id: string;
@@ -41,7 +42,7 @@ const accentClasses = ['bg-primary-container/20 text-primary', 'bg-secondary-con
                 <p class="mb-8 flex-grow font-body-md text-body-md text-on-surface-variant">
                     {article.data.summary}
                 </p>
-                <a class="mt-auto inline-flex items-center gap-2 font-label-md text-label-md font-bold text-primary transition-colors hover:text-primary-container" href={`/projects/${article.id}`}>
+                <a class="mt-auto inline-flex items-center gap-2 font-label-md text-label-md font-bold text-primary transition-colors hover:text-primary-container" href={withBase(`/projects/${article.id}/`)}>
                     Leer caso
                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>

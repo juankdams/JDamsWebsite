@@ -10,7 +10,9 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://simple-portfolio.vicbox.dev/',
+    site: 'https://juankdams.github.io',
+    base: '/JDamsWebsite/',
+    trailingSlash: 'always',
     integrations: [mdx(), react(), icon(), sitemap()],
     markdown: {
         shikiConfig: {

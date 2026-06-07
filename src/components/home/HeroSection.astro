@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { ME } from '@/config';
+import { withBase } from '@/lib/utils';
 
 interface Hero {
     eyebrow: string;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { hero } = Astro.props;
-const resume = `/${ME.contactInfo.resumeDoc}`;
+const resume = withBase(`/${ME.contactInfo.resumeDoc}`);
 const imagePath = `/src/assets/${ME.profileImage}`;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif}');
 

@@ -3,7 +3,7 @@
 import { Image } from 'astro:assets';
 
 // library imports
-import {cn} from "../lib/utils";
+import {cn, withBase} from "../lib/utils";
 
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 const { title, tags, cover, id } = Astro.props as Props;
 ---
 
-<a href={`/projects/${id}`} class="project-card" aria-label={`View project "${title}"`}>
+<a href={withBase(`/projects/${id}/`)} class="project-card" aria-label={`View project "${title}"`}>
     <div class="flex flex-col md:flex-row md:items-center gap-6">
         <div class="rounded-xl h-[250px] md:w-[150px] md:h-[150px] flex-none overflow-hidden">
             <Image
