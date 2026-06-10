@@ -1,0 +1,49 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Education {
+    title: string;
+    institution: string;
+    period: string;
+    location: string;
+}
+
+interface Props {
+    education: Education[];
+}
+
+const { education } = Astro.props;
+const accent = '#006780';
+---
+
+<section class="resume-section">
+    <ResumeSectionHeading icon="school" title="Educación"/>
+    <ul class="resume-education">
+        {education.map((item) => (
+            <li class="resume-education-item">
+                <div class="resume-meta-row resume-meta-row--top">
+                    <span class="resume-icon-cell resume-icon-cell--education">
+                        <ResumeIcon name="menu_book" size={13} color="#006948"/>
+                    </span>
+                    <div>
+                        <strong>{item.title}</strong>
+                        <span class="resume-education-institution">{item.institution}</span>
+                    </div>
+                </div>
+                <p class="resume-meta-row">
+                    <span class="resume-icon-cell resume-icon-cell--inline">
+                        <ResumeIcon name="schedule" size={10} color={accent}/>
+                    </span>
+                    <span>{item.period}</span>
+                </p>
+                <p class="resume-meta-row">
+                    <span class="resume-icon-cell resume-icon-cell--inline">
+                        <ResumeIcon name="location_on" size={10} color={accent}/>
+                    </span>
+                    <span>{item.location}</span>
+                </p>
+            </li>
+        ))}
+    </ul>
+</section>

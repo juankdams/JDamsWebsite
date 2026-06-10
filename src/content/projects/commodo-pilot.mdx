@@ -12,9 +12,11 @@ startDate: 2025-10-01
 endDate: 2026-06-06
 author: Juan Camilo Dams
 url: "#"
-cover: './images/budget-wise/finance_app_concept.webp'
-ogImage: './images/budget-wise/og-finance_app.webp'
+cover: '../../assets/images/commodo-pilot.png'
+ogImage: '../../assets/images/commodo-pilot.png'
 ---
+
+import infographic from '../../assets/images/commodo-pilot.png';
 
 <section className="project-canvas not-prose">
   <div className="project-canvas-panel">
@@ -36,59 +38,13 @@ ogImage: './images/budget-wise/og-finance_app.webp'
   </div>
 
   <figure className="project-canvas-flow">
-    <div role="img" aria-labelledby="pilot-flow-title" aria-describedby="pilot-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
-      <div>
-        <h3 id="pilot-flow-title" className="text-xl font-bold text-on-surface">Arquitectura funcional</h3>
-        <p id="pilot-flow-desc" className="mt-1 text-sm text-on-surface-variant">
-          El aplicativo solicita datos puntuales, BigQuery resuelve la lógica y el front end recibe respuestas listas para renderizar.
-        </p>
-      </div>
-
-      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.15fr] xl:items-center">
-        <div className="project-flow-card">
-          <span>1</span>
-          <strong>Warehouse</strong>
-          <p>Datos analíticos<br />en BigQuery</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>2</span>
-          <strong>Procedimientos</strong>
-          <p>Parámetros desde<br />el aplicativo</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>3</span>
-          <strong>API</strong>
-          <p>Consulta puntual<br />por componente</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>4</span>
-          <strong>Front end</strong>
-          <p>Respuesta lista<br />para visualizar</p>
-          <em>BI embebido</em>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
-          <strong className="block text-base font-bold text-on-surface">Sin duplicar modelo semántico</strong>
-          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">La lógica vive en BigQuery y responde por demanda</span>
-        </div>
-
-        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
-          <strong className="block text-base font-bold">Escalable y mantenible</strong>
-          <span className="mt-1 block text-sm text-white/80">Menor presión sobre infraestructura</span>
-        </div>
-      </div>
-    </div>
+    <img
+      src={infographic.src}
+      width={infographic.width}
+      height={infographic.height}
+      alt="Infografía de Commodo Pilot: BigQuery, procedimientos almacenados, API y visualización en el front end"
+      className="w-full rounded-[1.75rem] border border-outline-variant/40 bg-white"
+    />
     <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
       Flujo general: warehouse en BigQuery, procedimientos almacenados parametrizables, API del producto y visualización en el front end.
     </figcaption>

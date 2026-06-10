@@ -19,7 +19,7 @@ const getInitials = (name: string) => name
 
 {recommendations.length > 0 && (
     <section class="mx-auto mb-10 max-w-container-max px-gutter py-section-gap" id="recomendaciones">
-        <div class="relative overflow-hidden rounded-[3rem] border border-outline-variant/20 bg-gradient-to-br from-surface-container-high/80 to-surface-container-low/40 p-10 shadow-2xl shadow-surface-variant/50 backdrop-blur-xl md:p-16">
+        <div class="relative overflow-hidden rounded-[3rem] border border-outline-variant/20 bg-gradient-to-br from-surface-container-high/80 to-surface-container-low/40 p-6 shadow-2xl shadow-surface-variant/50 backdrop-blur-xl sm:p-10 md:p-16">
             <div class="absolute -right-10 -top-10 rotate-12 opacity-10">
                 <span class="material-symbols-outlined text-[15rem] text-primary">format_quote</span>
             </div>
@@ -29,17 +29,17 @@ const getInitials = (name: string) => name
                     Recomendaciones
                 </span>
 
-                <div class="relative min-h-[320px] md:min-h-[260px]">
+                <div class="relative transition-[height] duration-500" data-recommendation-slides>
                     {recommendations.map((recommendation, index) => (
                         <article
                             data-recommendation-slide
                             data-slide-index={index}
                             class:list={[
-                                'absolute inset-0 flex flex-col items-center justify-center transition-all duration-500',
-                                index === 0 ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-4',
+                                'flex w-full flex-col items-center justify-center px-1 transition-all duration-500 sm:px-0',
+                                index === 0 ? 'relative opacity-100 translate-y-0' : 'pointer-events-none absolute inset-x-0 top-0 opacity-0 translate-y-4',
                             ]}
                         >
-                            <blockquote class="mb-12 font-headline-md text-xl font-medium leading-relaxed text-on-surface md:text-2xl">
+                            <blockquote class="mb-8 font-headline-md text-lg font-medium leading-relaxed text-on-surface sm:mb-10 sm:text-xl md:mb-12 md:text-2xl">
                                 “{recommendation.quote}”
                             </blockquote>
 
@@ -81,13 +81,29 @@ const getInitials = (name: string) => name
         const carousel = document.querySelector<HTMLElement>('[data-recommendation-carousel]');
         if (!carousel) return;
 
+        const slidesContainer = carousel.querySelector<HTMLElement>('[data-recommendation-slides]');
         const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-recommendation-slide]'));
         const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('[data-recommendation-dot]'));
 
-        if (slides.length <= 1) return;
+        if (!slidesContainer || slides.length === 0) return;
 
         let activeIndex = 0;
         let timer: number | undefined;
+
+        const updateSlidesHeight = () => {
+            const activeSlide = slides[activeIndex];
+            if (!activeSlide) return;
+
+            slidesContainer.style.height = `${activeSlide.offsetHeight}px`;
+        };
+
+        const resizeObserver = new ResizeObserver(() => updateSlidesHeight());
+
+        const observeActiveSlide = () => {
+            resizeObserver.disconnect();
+            const activeSlide = slides[activeIndex];
+            if (activeSlide) resizeObserver.observe(activeSlide);
+        };
 
         const showSlide = (nextIndex: number) => {
             activeIndex = nextIndex;
@@ -95,12 +111,19 @@ const getInitials = (name: string) => name
             slides.forEach((slide, index) => {
                 const isActive = index === activeIndex;
 
+                slide.classList.toggle('relative', isActive);
+                slide.classList.toggle('absolute', !isActive);
+                slide.classList.toggle('inset-x-0', !isActive);
+                slide.classList.toggle('top-0', !isActive);
                 slide.classList.toggle('opacity-100', isActive);
                 slide.classList.toggle('translate-y-0', isActive);
                 slide.classList.toggle('opacity-0', !isActive);
                 slide.classList.toggle('translate-y-4', !isActive);
                 slide.classList.toggle('pointer-events-none', !isActive);
             });
+
+            updateSlidesHeight();
+            observeActiveSlide();
 
             dots.forEach((dot, index) => {
                 const isActive = index === activeIndex;
@@ -127,6 +150,11 @@ const getInitials = (name: string) => name
                 startTimer();
             });
         });
+
+        updateSlidesHeight();
+        observeActiveSlide();
+
+        if (slides.length <= 1) return;
 
         startTimer();
     }

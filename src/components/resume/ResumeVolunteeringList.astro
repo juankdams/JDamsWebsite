@@ -1,0 +1,39 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Volunteering {
+    title: string;
+    organization: string;
+    period: string;
+    description: string;
+}
+
+interface Props {
+    volunteering: Volunteering[];
+}
+
+const { volunteering } = Astro.props;
+const accent = '#006780';
+---
+
+<section class="resume-section">
+    <ResumeSectionHeading icon="volunteer_activism" title="Voluntariado y liderazgo"/>
+    <ul class="resume-volunteering">
+        {volunteering.map((item) => (
+            <li class="resume-volunteering-item">
+                <div class="resume-entry-head">
+                    <strong>{item.title}</strong>
+                    <span class="resume-entry-period">{item.period}</span>
+                </div>
+                <p class="resume-meta-row">
+                    <span class="resume-icon-cell resume-icon-cell--inline">
+                        <ResumeIcon name="groups" size={10} color={accent}/>
+                    </span>
+                    <span>{item.organization}</span>
+                </p>
+                <p class="resume-volunteering-text">{item.description}</p>
+            </li>
+        ))}
+    </ul>
+</section>

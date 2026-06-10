@@ -1,0 +1,46 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Skill {
+    name: string;
+    icon: string;
+    tags: string[];
+}
+
+interface Props {
+    skillTags: string[];
+    skills: Skill[];
+}
+
+const { skillTags, skills } = Astro.props;
+const accent = '#006780';
+---
+
+<aside class="resume-sidebar">
+    <section class="resume-section resume-section--sidebar">
+        <ResumeSectionHeading icon="category" title="Competencias técnicas"/>
+        <ul class="resume-tag-list">
+            {skillTags.map((tag) => (
+                <li class="resume-tag">{tag}</li>
+            ))}
+        </ul>
+    </section>
+
+    <section class="resume-section resume-section--sidebar">
+        <ResumeSectionHeading icon="layers" title="Stack por área"/>
+        <ul class="resume-skill-groups">
+            {skills.map((skill) => (
+                <li class="resume-skill-group">
+                    <div class="resume-meta-row">
+                        <span class="resume-icon-cell resume-icon-cell--skill">
+                            <ResumeIcon name={skill.icon} size={12} color={accent}/>
+                        </span>
+                        <strong class="resume-skill-name">{skill.name}</strong>
+                    </div>
+                    <p class="resume-skill-tags">{skill.tags.join(' · ')}</p>
+                </li>
+            ))}
+        </ul>
+    </section>
+</aside>

@@ -1,0 +1,70 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Job {
+    title: string;
+    company: string;
+    location: string;
+    period: string;
+    summary: string;
+    bullets: string[];
+    technologies: { name: string }[];
+}
+
+interface Props {
+    jobs: Job[];
+    showHeading?: boolean;
+    continued?: boolean;
+}
+
+const { jobs, showHeading = true, continued = false } = Astro.props;
+const accent = '#006780';
+---
+
+<section class="resume-section">
+    {showHeading && (
+        <ResumeSectionHeading
+            icon="work_history"
+            title={continued ? 'Experiencia laboral (cont.)' : 'Experiencia laboral'}
+        />
+    )}
+    <div class="resume-timeline">
+        {jobs.map((job) => (
+            <article class="resume-entry">
+                <div class="resume-entry-head">
+                    <div class="resume-entry-info">
+                        <h3 class="resume-entry-title">{job.title}</h3>
+                        <p class="resume-meta-row">
+                            <span class="resume-icon-cell resume-icon-cell--inline">
+                                <ResumeIcon name="apartment" size={11} color={accent}/>
+                            </span>
+                            <span>{job.company} · {job.location}</span>
+                        </p>
+                    </div>
+                    <span class="resume-entry-period">
+                        <span class="resume-icon-cell resume-icon-cell--inline">
+                            <ResumeIcon name="calendar_month" size={10} color={accent}/>
+                        </span>
+                        <span>{job.period}</span>
+                    </span>
+                </div>
+                <p class="resume-entry-summary">{job.summary}</p>
+                <ul class="resume-bullets">
+                    {job.bullets.map((bullet) => (
+                        <li class="resume-bullet-item">
+                            <span class="resume-bullet-marker" aria-hidden="true">•</span>
+                            <span class="resume-bullet-text">{bullet}</span>
+                        </li>
+                    ))}
+                </ul>
+                <p class="resume-tech-line">
+                    <span class="resume-icon-cell resume-icon-cell--inline">
+                        <ResumeIcon name="build" size={10} color="#006948"/>
+                    </span>
+                    <span>{job.technologies.map((tech) => tech.name).join(' · ')}</span>
+                </p>
+            </article>
+        ))}
+    </div>
+</section>

@@ -12,9 +12,11 @@ startDate: 2026-01-01
 endDate: 2026-06-06
 author: Juan Camilo Dams
 url: "#"
-cover: './images/budget-wise/finance_app_concept.webp'
-ogImage: './images/budget-wise/og-finance_app.webp'
+cover: '../../assets/images/app-cambios-gcp.png'
+ogImage: '../../assets/images/app-cambios-gcp.png'
 ---
+
+import infographic from '../../assets/images/app-cambios-gcp.png';
 
 <section className="project-canvas not-prose">
   <div className="project-canvas-panel">
@@ -36,59 +38,13 @@ ogImage: './images/budget-wise/og-finance_app.webp'
   </div>
 
   <figure className="project-canvas-flow">
-    <div role="img" aria-labelledby="gcp-manager-flow-title" aria-describedby="gcp-manager-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
-      <div>
-        <h3 id="gcp-manager-flow-title" className="text-xl font-bold text-on-surface">Flujo de gestión de cambios</h3>
-        <p id="gcp-manager-flow-desc" className="mt-1 text-sm text-on-surface-variant">
-          La app centraliza cambios, versiona SQL y automatiza acciones sobre buckets, Cloud Run y datasets.
-        </p>
-      </div>
-
-      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.15fr] xl:items-center">
-        <div className="project-flow-card">
-          <span>1</span>
-          <strong>Front end</strong>
-          <p>Next.js y React<br />para operar cambios</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>2</span>
-          <strong>Repositorio interno</strong>
-          <p>Commits, SQL<br />y diferencias</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>3</span>
-          <strong>Servicios GCP</strong>
-          <p>Buckets, Cloud Run<br />y procedimientos</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>4</span>
-          <strong>Ambientes</strong>
-          <p>QA, DEV y PRD<br />con promoción</p>
-          <em>Trazabilidad</em>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
-          <strong className="block text-base font-bold text-on-surface">Operaciones masivas</strong>
-          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">Carga, descarga, clonación y cambios internos de archivos</span>
-        </div>
-
-        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
-          <strong className="block text-base font-bold">Promoción automática</strong>
-          <span className="mt-1 block text-sm text-white/80">Procedimientos entre datasets</span>
-        </div>
-      </div>
-    </div>
+    <img
+      src={infographic.src}
+      width={infographic.width}
+      height={infographic.height}
+      alt="Infografía de la app para gestión de cambios en GCP: Next.js, repositorio interno, servicios de Google Cloud y promoción entre ambientes"
+      className="w-full rounded-[1.75rem] border border-outline-variant/40 bg-white"
+    />
     <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
       Flujo general: interfaz propia, repositorio interno de cambios, automatización sobre servicios GCP y promoción controlada entre ambientes.
     </figcaption>

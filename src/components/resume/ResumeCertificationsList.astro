@@ -1,0 +1,21 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+
+interface Props {
+    certifications: string[];
+}
+
+const { certifications } = Astro.props;
+---
+
+<section class="resume-section">
+    <ResumeSectionHeading icon="verified" title="Certificaciones"/>
+    <ul class="resume-bullets">
+        {certifications.map((certification) => (
+            <li class="resume-bullet-item">
+                <span class="resume-bullet-marker" aria-hidden="true">•</span>
+                <span class="resume-bullet-text">{certification}</span>
+            </li>
+        ))}
+    </ul>
+</section>

@@ -31,7 +31,7 @@ export const ME = {
     contactInfo: {
         email: "juancadams1@gmail.com",
         linkedin: "https://www.linkedin.com/in/juancdams/",
-        resumeDoc: "resume.pdf",
+        resumeDoc: "resume",
     },
     aboutMe: "Ingeniero Industrial con experiencia en Análisis de Datos e Inteligencia de Negocios, con habilidades en procesos de ETL, automatización de procesos y visualización con Power BI y otras herramientas. He trabajado en áreas de Tecnología, Planeación y Gestión Organizacional, optimizando la toma de decisiones a través del análisis de datos y el desarrollo de soluciones estratégicas. Además, cuento con más de 10 años de experiencia en liderazgo en proyectos sociales, académicos y humanitarios implementando nuevas tecnologías, metodologías de planificación y análisis de datos.",
 }

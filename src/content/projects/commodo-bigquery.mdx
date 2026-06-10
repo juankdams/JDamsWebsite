@@ -12,9 +12,11 @@ startDate: 2025-07-01
 endDate: 2026-06-06
 author: Juan Camilo Dams
 url: "#"
-cover: './images/budget-wise/finance_app_concept.webp'
-ogImage: './images/budget-wise/og-finance_app.webp'
+cover: '../../assets/images/implementacion-bigquery.png'
+ogImage: '../../assets/images/implementacion-bigquery.png'
 ---
+
+import infographic from '../../assets/images/implementacion-bigquery.png';
 
 <section className="project-canvas not-prose">
   <div className="project-canvas-panel">
@@ -36,59 +38,13 @@ ogImage: './images/budget-wise/og-finance_app.webp'
   </div>
 
   <figure className="project-canvas-flow">
-    <div role="img" aria-labelledby="commodo-flow-title" aria-describedby="commodo-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
-      <div>
-        <h3 id="commodo-flow-title" className="text-xl font-bold text-on-surface">Arquitectura de migración</h3>
-        <p id="commodo-flow-desc" className="mt-1 text-sm text-on-surface-variant">
-          Extracción desde AWS, carga con Cloud Run, almacenamiento en BigQuery y transformación SQL por capas.
-        </p>
-      </div>
-
-      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.15fr] xl:items-center">
-        <div className="project-flow-card">
-          <span>1</span>
-          <strong>AWS</strong>
-          <p>Extracción de tablas<br />origen</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>2</span>
-          <strong>Parquet</strong>
-          <p>Empaquetado eficiente<br />de datos</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>3</span>
-          <strong>Cloud Run</strong>
-          <p>Job de carga<br />automatizada</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>4</span>
-          <strong>BigQuery</strong>
-          <p>Data warehouse<br />analítico</p>
-          <em>SQL avanzado</em>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.85fr]">
-        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
-          <strong className="block text-base font-bold text-on-surface">Metodología de medallones</strong>
-          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">4 capas y datasets procesados</span>
-        </div>
-
-        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
-          <strong className="block text-base font-bold">Modelo semántico</strong>
-          <span className="mt-1 block text-sm text-white/80">Actualización promedio: 16 minutos</span>
-        </div>
-      </div>
-    </div>
+    <img
+      src={infographic.src}
+      width={infographic.width}
+      height={infographic.height}
+      alt="Infografía de la migración de Microsoft Fabric a BigQuery en Commodo: AWS, Parquet, Cloud Run y metodología de medallones"
+      className="w-full rounded-[1.75rem] border border-outline-variant/40 bg-white"
+    />
     <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
       Flujo general de migración: origen AWS, archivos Parquet, carga en Cloud Run, warehouse en BigQuery y transformación SQL por capas.
     </figcaption>

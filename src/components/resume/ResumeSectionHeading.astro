@@ -1,0 +1,17 @@
+---
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Props {
+    icon: string;
+    title: string;
+}
+
+const { icon, title } = Astro.props;
+---
+
+<div class="resume-section-heading">
+    <span class="resume-section-icon">
+        <ResumeIcon name={icon} size={13} color="#ffffff"/>
+    </span>
+    <h2 class="resume-section-title">{title}</h2>
+</div>

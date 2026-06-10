@@ -1,0 +1,689 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { ME } from '@/config';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Skill {
+    name: string;
+    description: string;
+    icon: string;
+    tags: string[];
+}
+
+interface Experience {
+    title: string;
+    company: string;
+    location: string;
+    period: string;
+    current: boolean;
+    summary: string;
+    bullets: string[];
+    technologies: { name: string }[];
+}
+
+interface Education {
+    title: string;
+    institution: string;
+    period: string;
+    location: string;
+}
+
+interface Project {
+    title: string;
+    summary: string;
+    tags: string[];
+    period: string;
+}
+
+interface Volunteering {
+    title: string;
+    organization: string;
+    period: string;
+    description: string;
+}
+
+interface Hero {
+    eyebrow: string;
+    summary: string;
+}
+
+interface Props {
+    hero: Hero;
+    skills: Skill[];
+    experience: Experience[];
+    education: Education[];
+    certifications: string[];
+    volunteering: Volunteering[];
+    projects: Project[];
+    profileImage?: ImageMetadata;
+    AboutContent?: any;
+}
+
+const {
+    hero,
+    skills,
+    experience,
+    education,
+    certifications,
+    volunteering,
+    projects,
+    profileImage,
+    AboutContent,
+} = Astro.props;
+
+const skillTags = [...new Set(skills.flatMap((skill) => skill.tags))];
+const accent = '#006780';
+const accentLight = '#85f8c4';
+const primary = '#006948';
+
+const professionalHeadline = 'Data Engineer & BI Analyst | Ing. Industrial | Rescuer 🚑 | Diseño arquitecturas de datos escalables y soluciones de BI que impulsan el crecimiento de negocios. Especialista en el sector Tech con enfoque en BPMN y Agile.';
+---
+
+<div id="resume-document" class="resume-doc">
+    <section class="resume-page">
+        <header class="resume-header">
+            <div class="resume-header-main">
+                {profileImage && (
+                    <div class="resume-avatar">
+                        <Image src={profileImage} alt={ME.name} width={88} height={88} class="resume-avatar-img"/>
+                    </div>
+                )}
+                <div>
+                    <h1 class="resume-name">{ME.name}</h1>
+                    <p class="resume-role">{professionalHeadline}</p>
+                </div>
+            </div>
+            <div class="resume-contact">
+                <div class="resume-contact-item">
+                    <span class="resume-icon">
+                        <ResumeIcon name="mail" size={12} color={accentLight}/>
+                    </span>
+                    <span class="resume-contact-text">{ME.contactInfo.email}</span>
+                </div>
+                <div class="resume-contact-item">
+                    <span class="resume-icon">
+                        <ResumeIcon name="link" size={12} color={accentLight}/>
+                    </span>
+                    <span class="resume-contact-text">linkedin.com/in/juancdams</span>
+                </div>
+                <div class="resume-contact-item">
+                    <span class="resume-icon">
+                        <ResumeIcon name="location_on" size={12} color={accentLight}/>
+                    </span>
+                    <span class="resume-contact-text">Barranquilla, Colombia</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="resume-content">
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="person" size={12} color={primary}/>
+                    </span>
+                    <h2>Perfil profesional</h2>
+                </div>
+                <p class="resume-lead">{hero.summary}</p>
+                {AboutContent && (
+                    <div class="resume-about">
+                        <AboutContent/>
+                    </div>
+                )}
+            </section>
+
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="category" size={12} color={primary}/>
+                    </span>
+                    <h2>Competencias técnicas</h2>
+                </div>
+                <ul class="resume-tags">
+                    {skillTags.map((tag) => (
+                        <li>{tag}</li>
+                    ))}
+                </ul>
+            </section>
+
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="layers" size={12} color={primary}/>
+                    </span>
+                    <h2>Stack por área</h2>
+                </div>
+                <div class="resume-skill-grid">
+                    {skills.map((skill) => (
+                        <article class="resume-skill-card">
+                            <div class="resume-inline">
+                                <span class="resume-icon">
+                                    <ResumeIcon name={skill.icon} size={12} color={accent}/>
+                                </span>
+                                <strong>{skill.name}</strong>
+                            </div>
+                            <p>{skill.tags.join(' · ')}</p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section class="resume-section resume-section--compact">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="verified" size={12} color={primary}/>
+                    </span>
+                    <h2>Certificaciones</h2>
+                </div>
+                <ul class="resume-bullets resume-bullets--compact">
+                    {certifications.map((certification) => (
+                        <li>
+                            <span class="resume-bullet" aria-hidden="true">•</span>
+                            <span>{certification}</span>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        </main>
+    </section>
+
+    <section class="resume-page">
+        <main class="resume-content">
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="work_history" size={12} color={primary}/>
+                    </span>
+                    <h2>Experiencia laboral</h2>
+                </div>
+                <div class="resume-entry-list">
+                    {experience.map((job) => (
+                        <article class="resume-entry">
+                            <div class="resume-entry-head">
+                                <div>
+                                    <h3>{job.title}</h3>
+                                    <p class="resume-inline resume-muted">
+                                        <span class="resume-icon">
+                                            <ResumeIcon name="apartment" size={10} color={accent}/>
+                                        </span>
+                                        <span>{job.company} · {job.location}</span>
+                                    </p>
+                                </div>
+                                <p class="resume-period resume-inline">
+                                    <span class="resume-icon">
+                                        <ResumeIcon name="calendar_month" size={10} color={accent}/>
+                                    </span>
+                                    <span>{job.period}</span>
+                                </p>
+                            </div>
+                            <p class="resume-summary">{job.summary}</p>
+                            <ul class="resume-bullets">
+                                {job.bullets.map((bullet) => (
+                                    <li>
+                                        <span class="resume-bullet" aria-hidden="true">•</span>
+                                        <span>{bullet}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <p class="resume-tech resume-inline">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="build" size={10} color={primary}/>
+                                </span>
+                                <span>{job.technologies.map((tech) => tech.name).join(' · ')}</span>
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <section class="resume-page">
+        <main class="resume-content">
+            <section class="resume-section resume-section--compact">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="rocket_launch" size={12} color={primary}/>
+                    </span>
+                    <h2>Proyectos destacados</h2>
+                </div>
+                <div class="resume-entry-list resume-entry-list--two-col">
+                    {projects.map((project) => (
+                        <article class="resume-entry resume-entry--compact">
+                            <div class="resume-entry-head">
+                                <h3>{project.title}</h3>
+                                <p class="resume-period resume-inline">
+                                    <span class="resume-icon">
+                                        <ResumeIcon name="calendar_month" size={10} color={accent}/>
+                                    </span>
+                                    <span>{project.period}</span>
+                                </p>
+                            </div>
+                            <p class="resume-summary">{project.summary}</p>
+                            <p class="resume-tech resume-inline">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="sell" size={10} color={primary}/>
+                                </span>
+                                <span>{project.tags.join(' · ')}</span>
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="school" size={12} color={primary}/>
+                    </span>
+                    <h2>Educación</h2>
+                </div>
+                <div class="resume-entry-list">
+                    {education.map((item) => (
+                        <article class="resume-entry resume-entry--compact">
+                            <h3 class="resume-inline">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="menu_book" size={10} color={accent}/>
+                                </span>
+                                <span>{item.title}</span>
+                            </h3>
+                            <p class="resume-summary">{item.institution}</p>
+                            <p class="resume-inline resume-muted">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="schedule" size={10} color={accent}/>
+                                </span>
+                                <span>{item.period}</span>
+                            </p>
+                            <p class="resume-inline resume-muted">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="location_on" size={10} color={accent}/>
+                                </span>
+                                <span>{item.location}</span>
+                            </p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <div class="resume-section-title">
+                    <span class="resume-icon resume-icon--heading">
+                        <ResumeIcon name="volunteer_activism" size={12} color={primary}/>
+                    </span>
+                    <h2>Voluntariado y liderazgo</h2>
+                </div>
+                <div class="resume-entry-list resume-entry-list--two-col">
+                    {volunteering.map((item) => (
+                        <article class="resume-entry resume-entry--compact">
+                            <div class="resume-entry-head">
+                                <h3>{item.title}</h3>
+                                <p class="resume-period">{item.period}</p>
+                            </div>
+                            <p class="resume-inline resume-muted">
+                                <span class="resume-icon">
+                                    <ResumeIcon name="groups" size={10} color={accent}/>
+                                </span>
+                                <span>{item.organization}</span>
+                            </p>
+                            <p class="resume-summary">{item.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </section>
+        </main>
+    </section>
+</div>
+
+<style>
+    .resume-doc {
+        width: 816px;
+        max-width: 100%;
+        margin: 0 auto;
+        color: #111c2d;
+        font-size: 11.5px;
+        line-height: 1.5;
+    }
+
+    .resume-page {
+        width: 816px;
+        height: 1056px;
+        padding: 22px;
+        background: #ffffff;
+        box-shadow: 0 24px 60px rgba(17, 28, 45, 0.12);
+        box-sizing: border-box;
+        page-break-after: always;
+        break-after: page;
+    }
+
+    .resume-page + .resume-page {
+        margin-top: 24px;
+    }
+
+    .resume-header {
+        background: linear-gradient(135deg, #006948 0%, #006780 100%);
+        color: #ffffff;
+        padding: 24px 28px 20px;
+        border-radius: 20px;
+    }
+
+    .resume-header-main {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+
+    .resume-avatar {
+        flex-shrink: 0;
+        width: 104px;
+        height: 104px;
+        overflow: hidden;
+        border-radius: 28px;
+        border: 4px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    :global(.resume-avatar-img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .resume-eyebrow {
+        margin: 0 0 6px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .resume-name {
+        margin: 0;
+        font-size: 32px;
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .resume-role {
+        max-width: 540px;
+        margin: 10px 0 0;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.92);
+    }
+
+    .resume-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .resume-contact-item {
+        display: flex;
+        align-items: center;
+        padding: 6px 8px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .resume-contact-text {
+        font-size: 9px;
+        font-weight: 500;
+        line-height: 1.35;
+        margin-left: 7px;
+    }
+
+    .resume-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        min-width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        line-height: 0;
+    }
+
+    .resume-icon--heading {
+        width: 18px;
+        min-width: 18px;
+        height: 18px;
+    }
+
+    .resume-content {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        margin-top: 10px;
+    }
+
+    .resume-section {
+        padding: 12px;
+        border: 1px solid #dee8ff;
+        border-radius: 14px;
+        background: #ffffff;
+        box-shadow: 0 4px 14px rgba(0, 105, 72, 0.04);
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .resume-section--compact {
+        padding: 10px 12px;
+    }
+
+    .resume-section--compact .resume-section-title {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+    }
+
+    .resume-section-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e7eeff;
+    }
+
+    .resume-section-title h2 {
+        margin: 0;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #006948;
+        margin-left: 8px;
+    }
+
+    .resume-lead {
+        margin: 0 0 6px;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #3d4a42;
+    }
+
+    .resume-about :global(p) {
+        margin: 0 0 6px;
+        font-size: 11px;
+        line-height: 1.5;
+        color: #3d4a42;
+    }
+
+    .resume-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .resume-tags li {
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: #f0f3ff;
+        border: 1px solid #c5d4ff;
+        font-size: 9px;
+        font-weight: 600;
+        color: #006948;
+    }
+
+    .resume-skill-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .resume-skill-card,
+    .resume-entry {
+        padding: 8px 10px;
+        border-radius: 12px;
+        background: #f9fbff;
+        border: 1px solid #e7eeff;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .resume-skill-card strong {
+        font-size: 10px;
+        color: #111c2d;
+    }
+
+    .resume-skill-card p {
+        margin: 4px 0 0 21px;
+        font-size: 9px;
+        line-height: 1.35;
+        color: #3d4a42;
+    }
+
+    .resume-entry-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .resume-entry-list--two-col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .resume-bullets {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .resume-inline {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        line-height: 1.35;
+    }
+
+    .resume-inline > .resume-icon + * {
+        margin-left: 7px;
+    }
+
+    .resume-muted {
+        color: #3d4a42;
+        font-size: 9px;
+    }
+
+    .resume-entry-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .resume-entry h3 {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 700;
+        color: #111c2d;
+    }
+
+    .resume-entry-period {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        flex-shrink: 0;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #e7f8ff;
+        font-size: 8px;
+        font-weight: 600;
+        color: #006780;
+        white-space: nowrap;
+        line-height: 1.2;
+    }
+
+    .resume-period {
+        flex-shrink: 0;
+        padding: 2px 6px;
+        border-radius: 999px;
+        background: #e7f8ff;
+        color: #006780;
+        font-size: 8px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .resume-summary {
+        margin: 5px 0 0;
+        font-size: 9px;
+        color: #3d4a42;
+        line-height: 1.35;
+    }
+
+    .resume-bullets {
+        margin-top: 5px;
+    }
+
+    .resume-bullets li {
+        display: flex;
+        align-items: flex-start;
+        margin: 0;
+        padding: 0;
+        font-size: 9px;
+        line-height: 1.35;
+        color: #3d4a42;
+    }
+
+    .resume-bullets li + li {
+        margin-top: 3px;
+    }
+
+    .resume-bullet {
+        width: 10px;
+        min-width: 10px;
+        line-height: 1.35;
+        color: #006948;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    .resume-bullet + span {
+        margin-left: 8px;
+    }
+
+    .resume-bullets--compact li {
+        font-size: 9px;
+    }
+
+    .resume-tech {
+        margin-top: 5px;
+        padding: 4px 7px;
+        border-radius: 8px;
+        background: #edf8f2;
+        font-size: 8px;
+        color: #006948;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+</style>

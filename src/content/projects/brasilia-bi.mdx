@@ -12,9 +12,11 @@ startDate: 2023-11-01
 endDate: 2025-07-09
 author: Juan Camilo Dams
 url: "#"
-cover: './images/budget-wise/finance_app_concept.webp'
-ogImage: './images/budget-wise/og-finance_app.webp'
+cover: '../../assets/images/bi-knime-brasilia.png'
+ogImage: '../../assets/images/bi-knime-brasilia.png'
 ---
+
+import infographic from '../../assets/images/bi-knime-brasilia.png';
 
 <section className="project-canvas not-prose">
   <div className="project-canvas-panel">
@@ -36,59 +38,13 @@ ogImage: './images/budget-wise/og-finance_app.webp'
   </div>
 
   <figure className="project-canvas-flow">
-    <div role="img" aria-labelledby="brasilia-flow-title" aria-describedby="brasilia-flow-desc" className="rounded-[1.75rem] border border-outline-variant/40 bg-[#f9f9ff] p-5 md:p-6">
-      <div>
-        <h3 id="brasilia-flow-title" className="text-xl font-bold text-on-surface">Arquitectura del flujo BI</h3>
-        <p id="brasilia-flow-desc" className="mt-1 text-sm text-on-surface-variant">
-          Extracción, preparación, almacenamiento analítico y consumo ejecutivo.
-        </p>
-      </div>
-
-      <div className="mt-6 grid gap-4 xl:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1.25fr] xl:items-center">
-        <div className="project-flow-card">
-          <span>1</span>
-          <strong>Oracle</strong>
-          <p>Base de datos<br />en Azure</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>2</span>
-          <strong>KNIME</strong>
-          <p>Pipelines ETL<br />low code</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>3</span>
-          <strong>PostgreSQL</strong>
-          <p>Data warehouse<br />analítico</p>
-        </div>
-
-        <div className="hidden h-px w-8 bg-primary/60 xl:block"></div>
-
-        <div className="project-flow-card">
-          <span>4</span>
-          <strong>Modelo semántico</strong>
-          <p>Hechos y dimensiones<br />Tablas agregadas</p>
-          <em>Carga optimizada</em>
-        </div>
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-[1fr_0.75fr]">
-        <div className="rounded-3xl border border-outline-variant/40 bg-primary/10 px-5 py-4 text-center">
-          <strong className="block text-base font-bold text-on-surface">Validación y limpieza</strong>
-          <span className="mt-1 block text-sm font-semibold text-on-surface-variant">Transformación de datos</span>
-        </div>
-
-        <div className="rounded-3xl bg-primary px-5 py-4 text-center text-white">
-          <strong className="block text-base font-bold">Tableros Power BI</strong>
-          <span className="mt-1 block text-sm text-white/80">Consumo ejecutivo</span>
-        </div>
-      </div>
-    </div>
+    <img
+      src={infographic.src}
+      width={infographic.width}
+      height={infographic.height}
+      alt="Infografía del flujo de Inteligencia de Negocios en Expreso Brasilia: Oracle, KNIME, PostgreSQL, modelo semántico y tableros Power BI"
+      className="w-full rounded-[1.75rem] border border-outline-variant/40 bg-white"
+    />
     <figcaption className="mt-3 text-center text-xs text-on-surface-variant">
       Flujo general: origen transaccional, pipelines ETL, data warehouse, modelo semántico y consumo ejecutivo.
     </figcaption>

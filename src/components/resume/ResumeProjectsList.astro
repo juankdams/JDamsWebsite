@@ -1,0 +1,44 @@
+---
+import ResumeSectionHeading from './ResumeSectionHeading.astro';
+import ResumeIcon from './ResumeIcon.astro';
+
+interface Project {
+    title: string;
+    summary: string;
+    tags: string[];
+    period: string;
+}
+
+interface Props {
+    projects: Project[];
+}
+
+const { projects } = Astro.props;
+const accent = '#006780';
+---
+
+<section class="resume-section">
+    <ResumeSectionHeading icon="rocket_launch" title="Proyectos destacados"/>
+    <div class="resume-projects">
+        {projects.map((project) => (
+            <article class="resume-project">
+                <div class="resume-entry-head">
+                    <h3 class="resume-entry-title">{project.title}</h3>
+                    <span class="resume-entry-period">
+                        <span class="resume-icon-cell resume-icon-cell--inline">
+                            <ResumeIcon name="calendar_month" size={10} color={accent}/>
+                        </span>
+                        <span>{project.period}</span>
+                    </span>
+                </div>
+                <p class="resume-entry-summary">{project.summary}</p>
+                <p class="resume-tech-line">
+                    <span class="resume-icon-cell resume-icon-cell--inline">
+                        <ResumeIcon name="sell" size={10} color="#006948"/>
+                    </span>
+                    <span>{project.tags.join(' · ')}</span>
+                </p>
+            </article>
+        ))}
+    </div>
+</section>

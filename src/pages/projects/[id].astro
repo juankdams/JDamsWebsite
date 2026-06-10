@@ -43,7 +43,7 @@ const { Content } = await render(post);
                 </div>
             </div>
 
-            <Image transition:name={`${post.id}-image`} class="h-56 rounded-3xl object-cover md:h-64" src={cover} alt={`Imagen principal del proyecto ${title}`}/>
+            <Image transition:name={`${post.id}-image`} class="h-auto max-h-72 w-full rounded-3xl border border-outline-variant/30 bg-white object-contain md:max-h-80" src={cover} alt={`Infografía del proyecto ${title}`}/>
         </header>
 
         <article id="article" class="project-article prose mt-6 max-w-none">
